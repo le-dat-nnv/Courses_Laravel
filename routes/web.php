@@ -12,6 +12,7 @@ use App\Http\Controllers\MenusController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\MenuAdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,10 +28,7 @@ Route::get('/', function () {
     return view('front_end.layout.index');
 });
 
-
-Route::get('dashboard', function () {
-    return view('back_end.layout.index');
-})->middleware('checkAuth');
+Route::get('dashboard' , [MenuAdminController::class , 'index'])->middleware('checkAuth');
 
 Route::get('login', function () {
     return view('front_end.home');

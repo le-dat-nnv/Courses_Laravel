@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\banner;
 use App\Models\Menu;
+use App\Models\MenuAdmin;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -28,6 +29,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         $this->composeMenuView();
         $this->composeBannerView();
+        $this->composeMenuAdmin();
     }
 
     private function composeMenuView()
@@ -42,6 +44,13 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('front_end.blocks.banner' , function ($view) {
             $list_banner = banner::all();
             $view->with('list_banner' , $list_banner);
+        });
+    }
+
+    private function composeMenuAdmin() {
+        View::composer('back_end.layout.navbar' , function ($view) {
+            $menuList = MenuAdmin::all();
+            $view->with('menuList' , $menuList);
         });
     }
 
