@@ -1,6 +1,5 @@
 @extends('back_end.layout.index')
 @section('content')
-    <h5>Add Course</h5>
 {{--        @php--}}
 {{--            $checkCat = [];--}}
 {{--            foreach($product as $pr) {--}}
@@ -12,10 +11,10 @@
 {{--            dd($checkCat);--}}
 {{--        @endphp--}}
     @include('back_end.forms.form' , [
-        'action' => 'ledat',
+        'action1' => 'Categories',
         'method' => 'post',
-        'inputNames' => ['name' , 'description' , 'Đường dẫn' , 'Image'],
-        'TitleNames' => ['name' , 'Mô Tả' , 'slug' , 'Image'],
+        'inputNames' => ['name' , 'description' , 'slug' , 'Image'],
+        'TitleNames' => ['name' , 'Mô Tả' , 'Đường dẫn' , 'Image'],
         'inputTypes' => ['text' , 'textarea' , 'text' , 'file'],
         'buttonText' => 'submit categories'
 ])

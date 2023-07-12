@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\banner;
+use App\Models\categories;
 use App\Models\Menu;
 use App\Models\MenuAdmin;
+use App\Models\Strengths;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -30,6 +32,8 @@ class ViewComposerServiceProvider extends ServiceProvider
         $this->composeMenuView();
         $this->composeBannerView();
         $this->composeMenuAdmin();
+        $this->composeStrengths();
+        $this->composeViewCategories();
     }
 
     private function composeMenuView()
@@ -51,6 +55,21 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('back_end.layout.navbar' , function ($view) {
             $menuList = MenuAdmin::all();
             $view->with('menuList' , $menuList);
+        });
+    }
+
+    private function composeStrengths() {
+        view::composer('front_end.blocks.strengths' , function ($view) {
+           $list_strengths = Strengths::select('id' , 'name' , 'name_short' , 'icon_svg')->get();
+           $view->with('list_strengths' , $list_strengths);
+        });
+    }
+
+    private function composeViewCategories() {
+        view::composer('front_end.blocks.categories' , function ($view){
+            $title = 'Course Categories';
+            $data = categories::select('id' , 'name' , 'image' , 'description' , 'slug')->get();
+            $view->with('title' , $title)->with('data' , $data);
         });
     }
 

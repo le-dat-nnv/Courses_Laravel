@@ -19,7 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('back_end/css/admin.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('back_end/css/style.css') }}" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
 </head>
 
 <body id="page-top">
@@ -106,7 +107,13 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('back_end/js/demo/chart-area-demo.js') }}"></script>
 <script src="{{ asset('back_end/js/demo/chart-pie-demo.js') }}"></script>
-
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 </body>
 
 </html>

@@ -20,4 +20,12 @@
   width: 25px;
   height: 25px; }
 
+.text_config {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-bottom: 0px; }
+
 /*# sourceMappingURL=style.css.map */

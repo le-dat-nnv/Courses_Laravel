@@ -34,3 +34,12 @@
         }
     }
 }
+
+.text_config{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-bottom: 0px;
+}

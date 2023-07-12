@@ -13,6 +13,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\MenuAdminController;
+use App\Http\Controllers\StrengthsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,7 +52,10 @@ Route::prefix('courses')->group(function () {
 
 Route::prefix('categories')->group(function () {
     Route::get('list', [categoriesController::class , 'index'])->name('listCategories');
-    Route::get('add', [categoriesController::class , 'getAdd'])->name('addCategories');
+    Route::get('add', [categoriesController::class , 'getAdd'])->name('Categories');
+    Route::post('store', [categoriesController::class , 'store'])->name('Categories.store');
+    Route::get('edit/{id}', [categoriesController::class , 'edit'])->name('Categories.edit');
+    Route::put('Categories/{id}', [categoriesController::class , 'update'])->name('Categories.update');
 });
 
 
@@ -63,4 +67,5 @@ Route::resource('menu', MenusController::class)->except(['show']);
 Route::resource('banner', BannerController::class)->except(['show']);
 Route::resource('rate', RateController::class)->except(['show']);
 Route::resource('bill', BillController::class)->except(['show']);
+Route::resource('strengths', StrengthsController::class)->except(['show']);
 Route::get('promotion/statistical', [PromotionsController::class, 'statistical'])->name('promotion.statistical');

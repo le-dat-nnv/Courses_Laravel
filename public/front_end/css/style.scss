@@ -3,3 +3,11 @@
         width: 100%;
     }
 }
+.text_config{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0px;
+}

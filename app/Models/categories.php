@@ -10,4 +10,11 @@ class categories extends Model
     use HasFactory;
 
     protected $table='tb_categories';
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'image'
+    ];
 }
