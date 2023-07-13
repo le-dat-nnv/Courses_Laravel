@@ -9,4 +9,19 @@
   overflow: hidden;
   padding: 0px; }
 
+.text_config2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 0px; }
+
+.course__instructors {
+  justify-content: space-between;
+  width: 100%;
+  bottom: 30px;
+  padding: 0 35px 0 35px;
+  z-index: 2; }
+
 /*# sourceMappingURL=style.css.map */

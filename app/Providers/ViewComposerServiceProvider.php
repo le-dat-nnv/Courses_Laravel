@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\banner;
 use App\Models\categories;
+use App\Models\courses;
 use App\Models\Menu;
 use App\Models\MenuAdmin;
 use App\Models\Strengths;
@@ -34,6 +35,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         $this->composeMenuAdmin();
         $this->composeStrengths();
         $this->composeViewCategories();
+        $this->composeViewCoursePopular();
     }
 
     private function composeMenuView()
@@ -69,6 +71,14 @@ class ViewComposerServiceProvider extends ServiceProvider
         view::composer('front_end.blocks.categories' , function ($view){
             $title = 'Course Categories';
             $data = categories::select('id' , 'name' , 'image' , 'description' , 'slug')->get();
+            $view->with('title' , $title)->with('data' , $data);
+        });
+    }
+
+    private function composeViewCoursePopular() {
+        view::composer('front_end.blocks.coursePopular' , function ($view) {
+            $title = 'Available Courses';
+            $data = courses::select('id', 'title' , 'image' , 'description', 'start_date' , 'end_date' , 'price')->limit(3)->get();
             $view->with('title' , $title)->with('data' , $data);
         });
     }

@@ -33,27 +33,9 @@
                 @elseif($inputTypes && $inputTypes[$index] === 'textarea1')
                     <textarea class="form-control @error($inputName) is-invalid @enderror" name="{{ $inputName }}">{{ isset($data) ? $data->$inputName : old($inputName) }}</textarea>
                 @elseif ($inputTypes && $inputTypes[$index] === 'select')
-                    <select class="form-control" name="{{ $inputName }}" id="{{ $inputName }}">
-                        @php
-                            $uniqueCategories = [];
-                        @endphp
-                        @if(isset($data))
-                            @foreach ($product as $category)
-                                @if ($category->getCat() && !in_array($category->getCat()->id, $uniqueCategories))
-                                    <option value="{{ $category->getCat()->id }}" {{ isset($category) && $category->getCat()->id == $category->id ? 'selected' : '' }}>
-                                        {{ $category->getCat()->name }}
-                                    </option>
-                                    @php
-                                        $uniqueCategories[] = $category->getCat()->id;
-                                    @endphp
-                                @endif
-
-                                <option value="{{ $category->id }}" {{ isset($category) && $category->id == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
-                        @endif
-                    </select>
+                    @if(isset($select))
+                        {!! $select !!}
+                    @endif
                     @if(!empty($select_add))
 
                         {!! $select_add !!}
@@ -70,6 +52,20 @@
                             <img src="@if(isset($data)){{ asset('storage/'.$data->image) }} @endif" alt="your_name">
                         </div>
                     </div>
+
+                @elseif($inputTypes[$index] == 'date')
+                        <div class="row">
+                            <div class="col-4">
+                                <input id="formFile" ref="{{ $inputName }}"  type="date" name="{{ $inputName }}" class="form-control @error($inputName) is-invalid @enderror" id="{{ $inputName }}" value="{{ old($inputName, isset($data) ? $data->$inputName : '') }}">
+                            </div>
+                        </div>
+
+                @elseif($inputTypes[$index] == 'time')
+                        <div class="row">
+                            <div class="col-4">
+                                <input id="formFile" ref="{{ $inputName }}"  type="time" name="{{ $inputName }}" class="form-control @error($inputName) is-invalid @enderror" id="{{ $inputName }}" value="{{ old($inputName, isset($data) ? $data->$inputName : '') }}">
+                            </div>
+                        </div>
 
                 @else
                     <input ref="{{ $inputName }}" class="form-control @error($inputName) is-invalid @enderror" type="{{ $inputTypes ? $inputTypes[$index] : 'text' }}" name="{{ $inputName }}" id="{{ $inputName }}" value="{{ old($inputName, isset($data) ? $data->$inputName : '') }}">

@@ -46,7 +46,10 @@ Route::post('check_login' , [AuthController::class , 'checkUser'])->name('checkl
 
 Route::prefix('courses')->group(function () {
     Route::get('list', [CoursesController::class , 'index'])->name('listProduct');
-    Route::get('add', [CoursesController::class , 'getAdd'])->name('addProduct');
+    Route::get('add', [CoursesController::class , 'getAdd'])->name('Courses');
+    Route::post('store', [CoursesController::class , 'store'])->name('Courses.store');
+    Route::get('edit/{id}', [CoursesController::class , 'edit'])->name('Courses.edit');
+    Route::put('update/{id}', [CoursesController::class , 'update'])->name('Courses.update');
     Route::get('pay_list', [CoursesController::class , 'payList'])->name('payList');
 });
 
