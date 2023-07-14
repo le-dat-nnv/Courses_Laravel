@@ -42,7 +42,7 @@
             <div class="offset-sidebar">
                 <div class="offset-widget offset-logo mb-30">
                     <a href="index.html">
-                        <img src="assets/img/logo/logo-02.png" alt="logo">
+                        <img style="width: 145px;" src="{{ asset('storage/'.config('tb_config.img_logo')) }}" alt="logo">
                     </a>
                 </div>
                 <div class="offset-widget mb-40">
@@ -189,18 +189,6 @@
             </div>
             <!-- team-area-end -->
 
-            <!-- events-area-start -->
-            <div class="events-area pt-130 pb-130" id="events-course">
-                @include('front_end.blocks.eventCourse')
-            </div>
-            <!-- events-area-end -->
-
-            <!-- blog-area-start -->
-            <div class="blog-area pt-130 pb-100" id="blog">
-                @include('front_end.blocks.blogCourse')
-            </div>
-            <!-- blog-area-end -->
-
             <!-- brand-area-start -->
             <div class="brand-area theme-bg pb-65 pt-65" id="brand-course">
                 @include('front_end.blocks.brandCourse')
@@ -216,7 +204,6 @@
 
 
         <!-- JS here -->
-        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script src="{{ asset('front_end/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
         <script src="{{ asset('front_end/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
         <script src="{{ asset('front_end/assets/js/popper.min.js') }}"></script>

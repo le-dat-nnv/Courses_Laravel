@@ -70,7 +70,7 @@
                             <a href="contact.html"> <i class="far fa-user-circle"></i>sing in</a>
                         </div>
                         <div class="hamburger-menu menu-bar info-bar">
-                            <a href="#"><img src="assets/img/icon/bar.png" alt=""></a>
+                            <a href="#"><img src="{{ asset('front_end/assets/img/icon/bar.png') }}" alt=""></a>
                         </div>
                     </div>
                 </div>

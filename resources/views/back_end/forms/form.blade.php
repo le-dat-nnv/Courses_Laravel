@@ -16,7 +16,7 @@
     </div>
     <div class="card-body">
         <form ref="btn_form_submit" id="form_submit" action="@if(isset($action))
-        {{ isset($data) ? route($action.'.update' , [$action , $data->id]) : route($action.'.store') }}
+        {{ isset($data) ? route($action.'.update' ,  $data->id) : route($action.'.store') }}
             @elseif($action1)
             {{ isset($data) ? route($action1.'.update' , $data->id) : route($action1.'.store') }}
         @endif

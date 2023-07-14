@@ -10,4 +10,12 @@ class lectures extends Model
     use HasFactory;
 
     protected $table = 'tb_lectures';
+
+    protected $fillable = [
+        'name',
+        'description',
+        'duration',
+        'specialize',
+        'image'
+    ];
 }

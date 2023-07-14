@@ -36,7 +36,23 @@ class LecturesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = $request->hasFile('image');
+        $data = [
+            'name'=>$request->name,
+            'description' => $request->description,
+            'duration'=>$request->duration,
+            'specialize' => $request->specialize,
+        ];
+        if($file) {
+            $currentYear = date('Y');
+            $currentMonth = date('m');
+            $currentDay = date('d');
+            $fileNew = $request->file('image');
+            $NewFile = $fileNew->store('Lecture/'.$currentYear.'/'.$currentMonth.'/'.$currentDay);
+            $data['image'] = $NewFile;
+            lectures::insert($data);
+            return redirect('Lectures');
+        }
     }
 
     /**
@@ -58,7 +74,8 @@ class LecturesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = lectures::find($id);
+        return view('back_end.Lectures.add' , compact('data'));
     }
 
     /**
@@ -70,7 +87,27 @@ class LecturesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $file_check = $request->hasFile('image');
+        $data = [
+            'name'=>$request->name,
+            'description' => $request->description,
+            'duration'=>$request->duration,
+            'specialize' => $request->specialize,
+        ];
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $currentDay = date('d');
+        if(!$file_check) {
+            lectures::find($id)->update($data);
+            return redirect('Lectures');
+        }
+        else {
+            $fileNew = $request->file('image');
+            $NewFile = $fileNew->store('Lecture/'.$currentYear.'/'.$currentMonth.'/'.$currentDay);
+            $data['image'] = $NewFile;
+            lectures::find($id)->update($data);
+            return redirect('Lectures');
+        }
     }
 
     /**

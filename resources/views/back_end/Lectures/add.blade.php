@@ -1,6 +1,5 @@
 @extends('back_end.layout.index')
 @section('content')
-    <h5>Add Lớp</h5>
 {{--        @php--}}
 {{--            $checkCat = [];--}}
 {{--            foreach($product as $pr) {--}}
@@ -12,11 +11,11 @@
 {{--            dd($checkCat);--}}
 {{--        @endphp--}}
     @include('back_end.forms.form' , [
-        'action' => 'ledat',
+        'action' => 'Lectures',
         'method' => 'post',
-        'inputNames' => ['title' , 'description' , 'duration' , 'is_active'],
-        'TitleNames' => ['Title', 'Mô tả' , 'Thời lượng bài giảng' , 'Trạng thái'],
-        'inputTypes' => ['text' , 'textarea' , 'text' , 'file' ],
+        'inputNames' => ['name' , 'description' , 'duration' , 'image' , 'specialize'],
+        'TitleNames' => ['Name Lecture', 'Mô tả' , 'Thời lượng bài giảng' , 'Image Lecture' , 'Chuyên môn'],
+        'inputTypes' => ['text' , 'textarea' , 'text' , 'file', 'text' ],
         'buttonText' => 'submit course'
 ])
 @endsection
