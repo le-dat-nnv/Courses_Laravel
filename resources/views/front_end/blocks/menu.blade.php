@@ -66,7 +66,11 @@
                             <a href="#"><i class="fab fa-youtube"></i></a>
                         </div>
                         <div class="header-sing d-none d-md-inline-block">
-                            <a href="{{ route('sing_in_front_end') }}"> <i class="far fa-user-circle"></i>sing in</a>
+                            @if(!Auth::check())
+                                <a href="{{ route('sing_in_front_end') }}"> <i class="far fa-user-circle"></i>Sing in</a>
+                            @else
+                                <a href="{{ route('log_out_front_end') }}"> <i class="far fa-user-circle"></i>Log out</a>
+                            @endif
                         </div>
                         <div class="hamburger-menu menu-bar info-bar">
                             <a href="#"><img src="{{ asset('front_end/assets/img/icon/bar.png') }}" alt=""></a>

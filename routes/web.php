@@ -83,7 +83,9 @@ Route::post('add-to-cart', [frontendCate::class , 'addToCart'])->name('addToCart
 Route::get('sign-in' , [AuthController::class , 'sign_in_front_end'])->name('sing_in_front_end');
 
 // đăng ký
-Route::get('register' , [AuthController::class , 'register_frontend'])->name('sing_in_front_end');
+Route::get('register' , [AuthController::class , 'register_frontend'])->name('register_frontend');
+Route::post('register' , [AuthController::class , 'register_frontend'])->name('register_frontend');
 
 // đng xuất
-Route::get('sign-out' , [AuthController::class , 'sign_out_front_end'])->name('sing_in_front_end');
+Route::get('sign-out' , [AuthController::class , 'sign_out_front_end'])->name('log_out_front_end');
+Route::post('sign-in' , [AuthController::class , 'sign_in_front_end'])->name('sign_in_front_end');

@@ -23,20 +23,20 @@
                                 $totalPrice += $ca['price'];
                             @endphp
                             <tbody>
-                                <tr class="cart-item">
-                                    <td class="course-thumbnail">
-                                        <img style="object-fit: cover" width="150" height="auto"
-                                             src="{{ asset('storage/'.$ca['image']) }}"
-                                             alt="Educating Through Christ to Learn And to Serve" loading="lazy"
-                                             title="Educating Through Christ to Learn And to Serve"></td>
-                                    <td class="course-name">
-                                        <h6 href="">{{ $ca['title'] }}</h6>
-                                    </td>
-                                    <td class="course-total col-number">
-                                        {{ $ca['price'] . ' VND' }}
-                                    </td>
-                                </tr>
-                        </tbody>
+                            <tr class="cart-item">
+                                <td class="course-thumbnail">
+                                    <img style="object-fit: cover" width="150" height="auto"
+                                         src="{{ asset('storage/'.$ca['image']) }}"
+                                         alt="Educating Through Christ to Learn And to Serve" loading="lazy"
+                                         title="Educating Through Christ to Learn And to Serve"></td>
+                                <td class="course-name">
+                                    <h6 href="">{{ $ca['title'] }}</h6>
+                                </td>
+                                <td class="course-total col-number">
+                                    {{ $ca['price'] . ' VND' }}
+                                </td>
+                            </tr>
+                            </tbody>
                         @endforeach
                         <tfoot>
                         <tr class="cart-subtotal">
@@ -49,18 +49,24 @@
                         </tr>
                         </tfoot>
                     </table>
-                    <button type="button" class="btn btn-success">Thanh toán</button>
+                    <span class="mt-3 mb-3">Chọn phương thức thanh toán</span>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary">Thanh toán khi nhận hàng</button>
+                        <button type="submit" class="btn btn-success mx-3">Thanh toán qua VNPay</button>
+                    </div>
                 </div>
             </div>
-            @if (!Auth::check())
-                <div class="col-6 card mt-3">
-                    <div class="card-body">
+            <div class="col-6 card mt-3">
+                <div class="card-body">
+                    @if (!Auth::check())
                         <span class="mt-3 mb-3">Vui lòng đăng nhập để enroll</span>
                         <form class="mt-3">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp">
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -76,9 +82,9 @@
                             <button type="submit" class="btn btn-success">Đăng ký</button>
                             <button type="submit" class="btn btn-primary">Quên mật khấu</button>
                         </div>
-                    </div>
+                    @endif
                 </div>
-            @endif
+            </div>
         </div>
     </div>
 @endsection

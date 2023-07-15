@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreUserRequest;
 
 class AuthController extends Controller
 {
@@ -118,7 +119,36 @@ class AuthController extends Controller
 
     }
 
-    public function sign_in_front_end() {
+    public function sign_in_front_end(Request $request) {
+        if ($request->isMethod('post')) {
+            if(Auth::attempt(['email'=> $request->email , 'password'=> $request->password])){
+                return redirect('/');
+            }
+            else {
+                return view('front_end.auth.login')->with('msg', 'Sai mật khẩu / tài khoản');
+            }
+        }
         return view('front_end.auth.login');
+    }
+
+    public function register_frontend(StoreUserRequest $request) {
+        if($request->post()) {
+            $data = [
+                'name' => $request->firstname,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'password' => $request->password
+            ];
+            $user = user::insert($data);
+            if ($user) {
+                return \redirect('/');
+            }
+        }
+        return view('front_end.auth.register');
+    }
+
+    public function sign_out_front_end() {
+        Auth::logout();
+        return \redirect('/');
     }
 }
