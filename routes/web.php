@@ -14,6 +14,7 @@ use App\Http\Controllers\RateController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\MenuAdminController;
 use App\Http\Controllers\StrengthsController;
+use App\Http\Controllers\frontEnd\categoryController as frontendCate;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +27,7 @@ use App\Http\Controllers\StrengthsController;
 */
 
 Route::get('/', function () {
-    return view('front_end.layout.index');
+    return view('front_end.layout.home');
 });
 
 Route::get('dashboard' , [MenuAdminController::class , 'index'])->middleware('checkAuth');
@@ -72,3 +73,17 @@ Route::resource('rate', RateController::class)->except(['show']);
 Route::resource('bill', BillController::class)->except(['show']);
 Route::resource('strengths', StrengthsController::class)->except(['show']);
 Route::get('promotion/statistical', [PromotionsController::class, 'statistical'])->name('promotion.statistical');
+
+
+Route::get('Categories', [frontendCate::class , 'getCategoriesCourse'])->name('CategoryCourses');
+Route::get('Categories/{slug}', [frontendCate::class , 'getCategoriesCourseDetail'])->name('CategoryCoursesDetail');
+Route::post('add-to-cart', [frontendCate::class , 'addToCart'])->name('addToCart.add-to-cart');
+
+// đăng nhập
+Route::get('sign-in' , [AuthController::class , 'sign_in_front_end'])->name('sing_in_front_end');
+
+// đăng ký
+Route::get('register' , [AuthController::class , 'register_frontend'])->name('sing_in_front_end');
+
+// đng xuất
+Route::get('sign-out' , [AuthController::class , 'sign_out_front_end'])->name('sing_in_front_end');

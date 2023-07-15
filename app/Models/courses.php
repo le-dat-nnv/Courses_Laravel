@@ -32,6 +32,7 @@ class courses extends Model
         'is_published',
         'is_trash',
         'schedule_datetime_start',
-        'schedule_datetime_end'
+        'schedule_datetime_end',
+        'slug'
     ];
 }

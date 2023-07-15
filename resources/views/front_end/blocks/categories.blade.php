@@ -27,4 +27,11 @@
         </div>
         @endforeach
     </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="course-btn text-center mt-35 mb-30">
+                <a class="c-btn" href="{{ route('CategoryCourses') }}">view all categories <i class="fal fa-long-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
 </div>

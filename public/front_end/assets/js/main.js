@@ -263,7 +263,7 @@ $('.brand-active').slick({
 
 	/* nice-select */
 	$('select').niceSelect();
- 
+
 
 	/* counter */
 	$('.counter').counterUp({
@@ -423,3 +423,19 @@ if ($('#contact-map').length != 0) {
 	  }
 
 	})(jQuery);
+
+$( "#add-to-cart" ).on( "click", function() {
+    var id_add_to_cart = $(this).attr('data-add-to-cart');
+    $.ajax({
+        url: '/add-to-cart',
+        type: 'GET',
+        data: { id: id_add_to_cart },
+        success: function(response) {
+            console.log('Yêu cầu thành công!');
+            window.location.href = "/add-to-cart";
+        },
+        error: function(error) {
+            console.log('Đã xảy ra lỗi:', error);
+        }
+    });
+} );

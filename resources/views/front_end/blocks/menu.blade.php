@@ -7,14 +7,13 @@
         @endforeach
     </ul>
 </div>
-
-<header class="header-transparent">
+<header class="header-transparent" style="@if(Route::currentRouteName() != '') position: absolute @endif">
     <div id="sticky-header" class="main-menu-area menu-padding pl-55 pr-55">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-xl-2 col-lg-7 col-md-6 col-8">
                     <div class="logo">
-                        <a href="index.html"><img style="width: 145px" src="{{ asset('storage/'.config('tb_config.img_logo')) }}" alt="" /></a>
+                        <a href="{{ url('/') }}"><img style="width: 145px" src="{{ asset('storage/'.config('tb_config.img_logo')) }}" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-xl-7 d-none d-xl-block">
@@ -67,7 +66,7 @@
                             <a href="#"><i class="fab fa-youtube"></i></a>
                         </div>
                         <div class="header-sing d-none d-md-inline-block">
-                            <a href="contact.html"> <i class="far fa-user-circle"></i>sing in</a>
+                            <a href="{{ route('sing_in_front_end') }}"> <i class="far fa-user-circle"></i>sing in</a>
                         </div>
                         <div class="hamburger-menu menu-bar info-bar">
                             <a href="#"><img src="{{ asset('front_end/assets/img/icon/bar.png') }}" alt=""></a>

@@ -117,4 +117,8 @@ class AuthController extends Controller
             }
 
     }
+
+    public function sign_in_front_end() {
+        return view('front_end.auth.login');
+    }
 }

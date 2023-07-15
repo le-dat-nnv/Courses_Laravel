@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\categories;
 use Illuminate\Http\Request;
 use App\Models\courses;
+use Illuminate\Support\Str;
 
 class CoursesController extends Controller
 {
@@ -24,6 +25,12 @@ class CoursesController extends Controller
     }
 
     public function store(Request $request) {
+        if(empty($request->slug)) {
+            $slug = Str::slug($request->title);
+        }
+        else{
+            $slug = Str::slug($request->slug);
+        }
         $data = [
             'title' => $request->title,
             'description' => $request->description,
@@ -39,7 +46,8 @@ class CoursesController extends Controller
             'is_published' => $request->is_published,
             'is_trash' => $request->is_trash,
             'schedule_datetime_start' => $request->schedule_datetime_start,
-            'schedule_datetime_end' => $request->schedule_datetime_end
+            'schedule_datetime_end' => $request->schedule_datetime_end,
+            'slug' => $slug
         ];
         $currentYear = date('Y');
         $currentMonth = date('m');
@@ -61,6 +69,12 @@ class CoursesController extends Controller
     }
 
     public function update($id , Request $request) {
+        if(empty($request->slug)) {
+            $slug = Str::slug($request->title);
+        }
+        else{
+            $slug = Str::slug($request->slug);
+        }
         $data = [
             'title' => $request->title,
             'description' => $request->description,
@@ -76,7 +90,8 @@ class CoursesController extends Controller
             'is_published' => $request->is_published,
             'is_trash' => $request->is_trash,
             'schedule_datetime_start' => $request->schedule_datetime_start,
-            'schedule_datetime_end' => $request->schedule_datetime_end
+            'schedule_datetime_end' => $request->schedule_datetime_end,
+            'slug' => $slug
         ];
         $currentYear = date('Y');
         $currentMonth = date('m');

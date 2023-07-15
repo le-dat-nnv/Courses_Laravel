@@ -13,9 +13,9 @@
     @include('back_end.forms.form' , [
         'action1' => 'Courses',
         'method' => 'post',
-        'inputNames' => ['title' , 'description' , 'price' , 'image' , 'id_category' , 'start_date' , 'end_date' , 'schedule_datetime_start' , 'schedule_datetime_end'],
-        'TitleNames' => ['title' , 'Mô Tả' , 'price' , 'Image' , 'Danh mục' , 'Ngày bắt đầu' , 'Ngày kết thúc' ,  'Thời gian bắt đầu học' , 'Thời gian kết thúc học'],
-        'inputTypes' => ['text' , 'textarea' , 'text' , 'file' , 'select' , 'date' , 'date' , 'time' , 'time'],
+        'inputNames' => ['title' , 'slug' , 'description' , 'price' , 'image' , 'id_category' , 'start_date' , 'end_date' , 'schedule_datetime_start' , 'schedule_datetime_end'],
+        'TitleNames' => ['title' , 'Đường dẫn' , 'Mô Tả' , 'price' , 'Image' , 'Danh mục' , 'Ngày bắt đầu' , 'Ngày kết thúc' ,  'Thời gian bắt đầu học' , 'Thời gian kết thúc học'],
+        'inputTypes' => ['text' ,'text' , 'textarea' , 'text' , 'file' , 'select' , 'date' , 'date' , 'time' , 'time'],
         'select' => $select,
         'buttonText' => 'submit courses'
 ])

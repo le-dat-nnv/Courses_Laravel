@@ -93,8 +93,8 @@
     </div>
 
     @include('back_end.forms.list' , [
-    'nameTitle' => ['title' , 'ảnh' , 'price' , "Danh mục"],
-    'list' => ['title' , 'image' , 'price' , 'id_category'],
+    'nameTitle' => ['title' , 'ảnh' , 'price' , "Danh mục" , 'Đường dẫn'],
+    'list' => ['title' , 'image' , 'price' , 'id_category' , 'slug'],
     'url' => 'Courses',
     'url_delete' => 'ledat'
 ])
