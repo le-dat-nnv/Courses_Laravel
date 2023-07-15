@@ -77,7 +77,7 @@ Route::get('promotion/statistical', [PromotionsController::class, 'statistical']
 
 Route::get('Categories', [frontendCate::class , 'getCategoriesCourse'])->name('CategoryCourses');
 Route::get('Categories/{slug}', [frontendCate::class , 'getCategoriesCourseDetail'])->name('CategoryCoursesDetail');
-Route::post('add-to-cart', [frontendCate::class , 'addToCart'])->name('addToCart.add-to-cart');
+Route::get('add-to-cart', [frontendCate::class , 'addToCart'])->name('addToCart.add-to-cart');
 
 // đăng nhập
 Route::get('sign-in' , [AuthController::class , 'sign_in_front_end'])->name('sing_in_front_end');

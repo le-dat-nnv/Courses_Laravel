@@ -22,21 +22,25 @@ class categoryController extends Controller
     }
 
     public function addToCart(Request $request) {
-        $id = $request->id;
-        $course_show = courses::select('id' , 'title' , 'image' , 'price' , 'description' , 'id_category' , 'slug')->find($id);
-        if (session()->has('cart')) {
-            $cart = session()->get('cart');
-        } else {
-            $cart = [];
+        if($request->isMethod('post')) {
+            $id = $request->id;
+            $course_show = courses::select('id' , 'title' , 'image' , 'price' , 'description' , 'id_category' , 'slug')->find($id);
+            if (session()->has('cart')) {
+                $cart = session()->get('cart');
+            } else {
+                $cart = [];
+            }
+            $cart[$id] = $course_show->toArray();
+            $data = [
+                1 => 'array',
+                2 => 'array'
+            ];
+            $cart = session()->get('cart', []);
+            $cart[$id] = $course_show->toArray();
+            session()->put('cart', $cart);
+            return view('front_end.modules.add_to_cart');
         }
-        $cart[$id] = $course_show->toArray();
-        $data = [
-            1 => 'array',
-            2 => 'array'
-        ];
-        $cart = session()->get('cart', []);
-        $cart[$id] = $course_show->toArray();
-        session()->put('cart', $cart);
         return view('front_end.modules.add_to_cart');
+
     }
 }
