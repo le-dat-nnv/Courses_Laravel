@@ -16,6 +16,8 @@ class lectures extends Model
         'description',
         'duration',
         'specialize',
-        'image'
+        'image',
+        'slug'
     ];
+
 }

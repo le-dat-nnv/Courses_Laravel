@@ -33,7 +33,9 @@
                             @if($title === 'image')
                                 <td><img width="200px" height="200px" src="{{ asset('storage/'.$product->image) }}" alt="Your Image"></td>
                             @elseif($title === 'id_category')
-                                <td>{{ $product->getCat()->id}}</td>
+                                <td>{{ $product->getCat()->name}}</td>
+                            @elseif($title === 'id_lecture')
+                                <td>{{ $product->getLecture()->name}}</td>
                             @else
                                 <td>{!! $product->{$title} !!}</td>
                             @endif

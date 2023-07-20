@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="team-text">
-                    <h6><a href="team-details.html">{{ $list->name }}</a></h6>
+                    <h6><a href="{{ url('getLecture/'.$list->slug) }}">{{ $list->name }}</a></h6>
                     <span>{{ $list->specialize }}</span>
                     <div class="team-meta">
                         <span><i class="far fa-book"></i> 750+ Courses</span>

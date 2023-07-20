@@ -29,18 +29,24 @@
             @foreach ($inputNames as $index => $inputName)
                 <label class='mb-2 mt-4' for="{{ $inputName }}">{{ $TitleNames[$index] }}</label>
                 @if ($inputTypes && $inputTypes[$index] === 'textarea')
-                    <textarea class="form-control @error($inputName) is-invalid @enderror" name="{{ $inputName }}" id="editor">{{ isset($data) ? $data->$inputName : old($inputName) }}</textarea>
+                    <textarea class="form-control ckeditors_ledat @error($inputName) is-invalid @enderror" name="{{ $inputName }}">{{ isset($data) ? $data->$inputName : old($inputName) }}</textarea>
                 @elseif($inputTypes && $inputTypes[$index] === 'textarea1')
-                    <textarea class="form-control @error($inputName) is-invalid @enderror" name="{{ $inputName }}">{{ isset($data) ? $data->$inputName : old($inputName) }}</textarea>
+                    <textarea class="form-control ckeditors_ledat @error($inputName) is-invalid @enderror" name="{{ $inputName }}">{{ isset($data) ? $data->$inputName : old($inputName) }}</textarea>
                 @elseif ($inputTypes && $inputTypes[$index] === 'select')
-                    @if(isset($select))
-                        {!! $select !!}
-                    @endif
+                        @if (isset($select[$inputName]))
+                            {!! $select[$inputName] !!}
+                        @endif
                     @if(!empty($select_add))
 
                         {!! $select_add !!}
 
                     @endif
+                    @if(!empty($select_list))
+
+                        {!! $select_list !!}
+
+                    @endif
+
 
                 @elseif ($inputTypes && $inputTypes[$index] === 'file')
                     <div class="row">

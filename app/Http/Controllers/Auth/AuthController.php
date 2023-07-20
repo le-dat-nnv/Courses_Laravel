@@ -114,7 +114,7 @@ class AuthController extends Controller
                 return redirect()->intended('dashboard');
             }
             else {
-                dd('123');
+                return view('front_end.home')->with(['msg'=>'sai mật khẩu hoặc tài khoản']);
             }
 
     }
@@ -122,7 +122,7 @@ class AuthController extends Controller
     public function sign_in_front_end(Request $request) {
         if ($request->isMethod('post')) {
             if(Auth::attempt(['email'=> $request->email , 'password'=> $request->password])){
-                return redirect('/');
+                return redirect()->intended('dashboard');
             }
             else {
                 return view('front_end.auth.login')->with('msg', 'Sai mật khẩu / tài khoản');
@@ -132,23 +132,30 @@ class AuthController extends Controller
     }
 
     public function register_frontend(StoreUserRequest $request) {
-        if($request->post()) {
+        if($request->isMethod('post')) {
             $data = [
                 'name' => $request->firstname,
                 'lastname' => $request->lastname,
                 'email' => $request->email,
-                'password' => $request->password
+                'password' => Hash::make($request->input('password')),
             ];
             $user = user::insert($data);
             if ($user) {
                 return \redirect('/');
             }
         }
-        return view('front_end.auth.register');
+        else{
+            return view('front_end.auth.register');
+        }
+
     }
 
     public function sign_out_front_end() {
         Auth::logout();
         return \redirect('/');
+    }
+
+    public function register_frontends() {
+
     }
 }

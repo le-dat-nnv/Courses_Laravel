@@ -108,12 +108,17 @@
 <script src="{{ asset('back_end/js/demo/chart-area-demo.js') }}"></script>
 <script src="{{ asset('back_end/js/demo/chart-pie-demo.js') }}"></script>
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+    var ckeditors = document.getElementsByClassName('ckeditors_ledat');
+
+    for (var i = 0; i < ckeditors.length; i++) {
+        ClassicEditor
+            .create(ckeditors[i])
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
 </script>
+@yield('script')
 </body>
 
 </html>

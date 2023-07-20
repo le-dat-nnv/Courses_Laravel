@@ -9,6 +9,11 @@
     </div>
     <div class="row">
         @foreach($data as $list)
+            @php
+                $nameLecture = $list->getLecture()->name;
+                $firstName = last(explode(' ', $nameLecture));
+                $firstName = trim($firstName);
+            @endphp
             <div class="col-xl-4 col-lg-4 col-md-6">
             <div class="course-wrapper white-bg mb-30">
                 <div class="course-inner">
@@ -16,8 +21,8 @@
                         <a href="courses-details.html"><img src="{{ asset('front_end/assets/img/course/c-01.jpg') }}" alt=""></a>
                         <div class="course__instructors pos-abl d-flex align-items-center">
                             <div class="course__instructor--thumb">
-                                <img src="{{ asset('front_end/assets/img/course/instructor1.png') }}" alt="">
-                                <h5>Warner</h5>
+                                <img style="width: 35px" src="{{ asset('storage/'.$list->getLecture()->image) }}" alt="">
+                                <h5>{{ 'Teacher '.$firstName }}</h5>
                             </div>
                             <div class="course__instructor--price-tag">
                                 <span>{{ $list->price.'VND' }}</span>
@@ -61,11 +66,8 @@
                             English Courses' }}</a></h4>
                     <div class="course__instructor d-flex align-items-center mb-25">
                         <div class="course__instructor--thumb">
-                            <img src="{{ asset('front_end/assets/img/course/instructor1.png') }}" alt="">
-                            <h5>Warner</h5>
-                        </div>
-                        <div class="course__instructor--price-tag">
-                            <span>$59.95</span>
+                            <img style="width: 35px" src="{{ asset('storage/'.$list->getLecture()->image) }}" alt="">
+                            <h5>{{ 'Teacher '.$firstName }}</h5>
                         </div>
                     </div>
                     <div class="text_config2">{!! $list->description !!}</div>
@@ -83,7 +85,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="course-btn text-center mt-35 mb-30">
-                <a class="c-btn" href="courses.html">view all courses <i class="fal fa-long-arrow-right"></i></a>
+                <a class="c-btn" href="{{ route('course.listFrontEnd') }}">view all courses <i class="fal fa-long-arrow-right"></i></a>
             </div>
         </div>
     </div>

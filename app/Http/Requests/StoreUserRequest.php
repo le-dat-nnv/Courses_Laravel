@@ -23,13 +23,24 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'email' => 'required|email|unique:users',
-            'lastname' => 'required',
-            'firstname' => 'required',
-            'password' => 'required',
-            'Repeatpassword' => 'required|same:password'
-        ];
+        $rules = [];
+        $currentAction = $this->route()->getActionMethod();
+        switch ($this->method()):
+            case 'POST':
+                switch ($currentAction):
+                    case 'register_frontend':
+                        $rules = [
+                            'email' => 'required|email|unique:users',
+                            'lastname' => 'required',
+                            'firstname' => 'required',
+                            'password' => 'required',
+                            'Repeatpassword' => 'required|same:password'
+                        ];
+                    break;
+                endswitch;
+            break;
+        endswitch;
+        return $rules;
     }
 
     public function messages()

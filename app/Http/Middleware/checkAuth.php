@@ -19,10 +19,12 @@ class checkAuth
     public function handle($request, $next)
     {
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (!auth()->check()) {
-            return Redirect::to('login');
+            return redirect()->to('login');
+        } else if (auth()->user()->role == 0) {
+            return redirect()->to('/');
         }
-
         return $next($request);
     }
 }

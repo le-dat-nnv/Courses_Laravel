@@ -39,27 +39,25 @@
             <!-- offset-sidebar start -->
             <div class="offset-sidebar">
                 <div class="offset-widget offset-logo mb-30">
-                    <a href="index.html">
+                    <a href="{{ url('/') }}">
                         <img style="width: 145px;" src="{{ asset('storage/'.config('tb_config.img_logo')) }}" alt="logo">
                     </a>
                 </div>
                 <div class="offset-widget mb-40">
                     <div class="info-widget">
-                        <h4 class="offset-title mb-20">About Us</h4>
+                        <h4 class="offset-title mb-20">Giới thiệu</h4>
                         <p class="mb-30">
-                            But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
-                            was born and will give you a complete account of the system and expound the actual teachings of
-                            the great explore
+                            {{ config('tb_config.giới thiệu') }}
                         </p>
-                        <a class="c-btn btn-round-02" href="contact.html">Contact Us</a>
+                        <a class="c-btn btn-round-02 btn_tr" href="contact.html">liên hệ</a>
                     </div>
                 </div>
                 <div class="offset-widget mb-30 pr-10">
                     <div class="info-widget info-widget2">
-                        <h4 class="offset-title mb-20">Contact Info</h4>
-                        <p> <i class="fal fa-address-book"></i> 23/A, Miranda City Likaoli Prikano, Dope</p>
-                        <p> <i class="fal fa-phone"></i> +0989 7876 9865 9 </p>
-                        <p> <i class="fal fa-envelope-open"></i> <a href="https://www.devsnews.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb5b2bab39cb9a4bdb1acb0b9f2bfb3b1">[email&#160;protected]</a> </p>
+                        <h4 class="offset-title mb-20">Thông tin liên hệ</h4>
+                        <p> <i class="fal fa-address-book"></i>{{ config('tb_config.address') }}</p>
+                        <p> <i class="fal fa-phone"></i>{{ config('tb_config.phone_home') }}</p>
+                        <p> <i class="fal fa-envelope-open"></i> <a href="https://www.devsnews.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb5b2bab39cb9a4bdb1acb0b9f2bfb3b1">{{ config('tb_config.email') }}</a> </p>
                     </div>
                 </div>
             </div>

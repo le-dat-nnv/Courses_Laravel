@@ -36,12 +36,8 @@
                                 <p>{!! $courses_detail->description !!}</p>
                             </div>
                             <div class="curriculumn-area mb-65">
-                                <h3 class="course-title-03 mb-20">Curriculum</h3>
-                                <p class="mb-25">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                                    fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
-                                    nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                    consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-                                    labore et dolore magnam aliquam</p>
+                                <h3 class="course-title-03 mb-20">Chương trình giảng dạy</h3>
+                                <p class="mb-25">{!! $courses_detail->curriculum !!}</p>
                                 <ul class="curriculumn-list">
                                     <li><a href="#">Lesson 01 : Introduced About Web Design <span class="f-right"><i
                                                     class="far fa-play-circle"></i> 05:59 hr</span> </a></li>
@@ -173,16 +169,16 @@
                                 </div>
                             </div>
                             <div class="course-intructor-area">
-                                <h3 class="course-title-03 mb-20">Course Instructors</h3>
+                                <h3 class="course-title-03 mb-20">Giảng viên khóa học</h3>
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 col-md-6">
                                         <div class="instructors text-center mb-30">
-                                            <div class="instructors-thumb mb-30"><img
-                                                    src="{{ asset('front_end/assets/img/team/t-01.png') }}"
+                                            <div class="instructors-thumb mb-30"><img class="rounded-1"
+                                                    src="{{ asset('storage/'.$courses_detail->lecture_image) }}"
                                                     alt=""></div>
                                             <div class="instructors-name">
-                                                <h4><a href="team-details.html">Somalia D Silva</a></h4>
-                                                <span>Math Teacher</span>
+                                                <h4><a href="team-details.html">{{ $courses_detail->name }}</a></h4>
+                                                <span>{{ $courses_detail->specialize }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -200,9 +196,9 @@
                                         </a>
                                     </li>
                                     <li><a href="#"><i class="fal fa-user-circle"></i> Instructors <span
-                                                class="f-right">David Warner</span></a></li>
+                                                class="f-right">{{ $courses_detail->name }}</span></a></li>
                                     <li><a href="#"><i class="fal fa-clock"></i> Duration <span class="f-right">
-                                                {{ $courses_detail->hours }}Hours</span></a></li>
+                                                {{ $courses_detail->duration }}Hours</span></a></li>
                                     <li><a href="#"><i class="fal fa-book"></i> Lectures <span class="f-right">20
                                                 Lessons</span></a></li>
                                     <li><a href="#"><i class="fal fa-users"></i> Enrolled <span class="f-right">963

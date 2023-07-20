@@ -41,58 +41,58 @@
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="text"
-                                           class="form-control form-control-user @if($errors) is-invalid @endif"
+                                           class="form-control form-control-user @error('firstname') is-invalid @enderror"
                                            name="firstname"
-                                           placeholder="First Name">
-                                    @if($errors->has('firstname'))
-                                        <p class="invalid-feedback">
-                                            <strong>{{ $errors->first('firstname') }}</strong>
-                                        </p>
+                                           placeholder="First Name" value="{{ old('firstname') }}">
+                                    @error('firstname')
+                                    <p class="invalid-feedback">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </p>
                                     @endif
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="text"
-                                           class="form-control form-control-user @if($errors) is-invalid @endif"
+                                           class="form-control form-control-user @error('lastname') is-invalid @enderror"
                                            name="lastname"
-                                           placeholder="Last Name">
-                                    @if($errors->has('email'))
-                                        <p class="invalid-feedback">
-                                            <strong>{{ $errors->first('lastname') }}</strong>
-                                        </p>
-                                    @endif
+                                           placeholder="Last Name" value="{{ old('lastname') }}">
+                                    @error('lastname')
+                                    <p class="invalid-feedback">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="email"
-                                       class="form-control form-control-user @if($errors) is-invalid @endif"
+                                       class="form-control form-control-user @error('email') is-invalid @enderror"
                                        name="email"
                                        placeholder="Email Address">
-                                @if($errors->has('email'))
-                                    <p class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </p>
-                                @endif
+                                @error('email')
+                                <p class="invalid-feedback">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </p>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="password"
-                                           class="form-control form-control-user @if($errors->has('password')) is-invalid @endif"
-                                           name="password" placeholder="Password">
-                                    @if($errors->has('password'))
-                                        <p class="invalid-feedback">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </p>
-                                    @endif
+                                           class="form-control form-control-user @error('password') is-invalid @enderror"
+                                           name="password" placeholder="Password" value="{{ old('password') }}">
+                                    @error('password')
+                                    <p class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </p>
+                                    @enderror
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="password"
-                                           class="form-control form-control-user @if($errors) is-invalid @endif"
+                                           class="form-control form-control-user @error('Repeatpassword') is-invalid @enderror"
                                            name="Repeatpassword" placeholder="Repeat Password">
-                                    @if($errors->has('Repeatpassword'))
-                                        <p class="invalid-feedback">
-                                            <strong>{{ $errors->first('Repeatpassword') }}</strong>
-                                        </p>
-                                    @endif
+                                    @error('Repeatpassword')
+                                    <p class="invalid-feedback">
+                                        <strong>{{ $errors->first('Repeatpassword') }}</strong>
+                                    </p>
+                                    @enderror
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-user btn-block">

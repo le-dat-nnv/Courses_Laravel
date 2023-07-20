@@ -49,11 +49,13 @@
                         </tr>
                         </tfoot>
                     </table>
-                    <span class="mt-3 mb-3">Chọn phương thức thanh toán</span>
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-primary">Thanh toán khi nhận hàng</button>
-                        <button type="submit" class="btn btn-success mx-3">Thanh toán qua VNPay</button>
-                    </div>
+                    @if (Auth::check())
+                        <span class="mt-3 mb-3">Chọn phương thức thanh toán</span>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary">Thanh toán khi nhận hàng</button>
+                            <button type="submit" class="btn btn-success mx-3">Thanh toán qua VNPay</button>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-6 card mt-3">

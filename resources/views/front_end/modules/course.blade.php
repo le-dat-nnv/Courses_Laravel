@@ -1,42 +1,32 @@
 @extends('front_end.layout.index')
 @section('content')
     @include('front_end.layout.breadcrumb' , [
-        'title_breadcrumb' => 'Our Courses',
-        'breadcrumb' => [' Our Courses ']
+        'title_breadcrumb' => 'Course',
+        'breadcrumb' => [' course ']
     ])
-    <!--page-title-area end-->
-
     <!-- course-area-start -->
-    <div class="course-area course-area-02 pt-130 pb-100">
+    <div class="course-area pt-130 pb-100">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="portfolio-menu portfolio-menu-02 pr-menu-03 text-center mb-30 pr-70 pl-70">
-                        <button class="active" data-filter="*">Show All</button>
-                        @foreach($data as $key=>$list)
-                            <button data-filter="{{ '.cat'.$key+1 }}" class="">{{ $list->name }}</button>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <div id="portfolio-grid" class="row row-portfolio">
-                @foreach($course as $key=>$listCourse)
-                    <div class="col-xl-3 col-lg-4 col-md-6 grid-item {{ 'cat'.$listCourse->id_category }}">
-                        <div class="course-wrapper course-wrapper-03 white-bg mb-30">
-                            <div class="course-inner">
-                                <div class="course-img course-img-02 pos-rel mb-25">
-                                    <a href="{{ url('Categories/'.$listCourse->slug) }}">
-                                        <img src="{{ asset('front_end/assets/img/course/c-04.jpg') }}" alt="">
-                                    </a>
+                @foreach($data_course as $list)
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="course-wrapper course-wrapper-02 mb-30">
+                            <div class="course-inner course-inner-02">
+                                <div class="course-img pos-rel mb-25">
+                                    <a href="courses-details.html"><img
+                                            src="{{ asset('front_end/assets/img/course/c-01.jpg') }}" alt=""></a>
                                     <div class="course__instructor pos-abl d-flex align-items-center">
                                         <div class="course__instructor--thumb">
                                             <img class="border border-5 rounded-5" style="width: 40px; height: 40px;"
-                                                 src="{{ asset('storage/'.$listCourse->image) }}" alt="">
-                                            <span class="text-white">{{ $listCourse->name }}</span>
+                                                 src="{{ asset('storage/'.$list->getLecture()->image) }}" alt="">
+                                            <span class="text-white">{{ $list->getLecture()->name }}</span>
+                                        </div>
+                                        <div class="course__instructor--price-tag">
+                                            <span>{{ $list->price }}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="course-text course-text-inner">
+                                <div class="course-text">
                                     <div class="course-cat-meta d-flex align-items-center mb-15">
                                         <span><a href="courses-details.html">english</a></span>
                                         <div class="review-icon">
@@ -47,12 +37,9 @@
                                             <a href="#"><i class="fas fa-star-half-alt"></i></a>
                                         </div>
                                     </div>
-                                    <h5 class="semi-title pb-25">
-                                        <a href="{{ url('Categories/'.$listCourse->slug) }}" class="text_config">
-                                            {{ 'The course ' .$listCourse->title }}
-                                        </a>
-                                    </h5>
-                                    <h6 class="mt-3 mb-3">{{ $listCourse->price.' VND' }}</h6>
+                                    <h4 class="semi-title pb-30 mb-20"><a class="text_config"
+                                                                          href="courses-details.html">The
+                                            course {{ $list->title }}</a></h4>
                                     <div class="course-meta">
                                         <span><i class="far fa-users"></i> <a href="#">25</a></span>
                                         <span><i class="far fa-book"></i> <a href="#">36hr</a></span>
@@ -60,9 +47,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="course-text course-text-02 course-text-inner theme-bg2">
+                            <div class="course-text course-text-02 theme-bg">
                                 <div class="course-cat-meta course-cat-meta-02 d-flex align-items-center mb-15">
-                                    <span><a href="courses-details.html">business</a></span>
+                                    <span><a href="{{ url('course/'.$list->slug) }}">english</a></span>
                                     <div class="review-icon">
                                         <a href="#"><i class="fas fa-star"></i></a>
                                         <a href="#"><i class="fas fa-star"></i></a>
@@ -71,21 +58,17 @@
                                         <a href="#"><i class="fas fa-star-half-alt"></i></a>
                                     </div>
                                 </div>
-                                <h5 class="semi-title mb-30">
-                                    <a href="courses-details.html">
-                                        {{ $listCourse->title }}
-                                    </a>
-                                </h5>
+                                <h4 class="semi-title mb-30"><a class="text_config" href="{{ url('course/'.$list->slug) }}">The
+                                        course {{ $list->title }}</a></h4>
                                 <div class="course__instructor d-flex align-items-center mb-25">
                                     <div class="course__instructor--thumb">
                                         <img class="border border-5 rounded-5" style="width: 40px; height: 40px;"
-                                             src="{{ asset('storage/'.$listCourse->image) }}" alt="">
-                                        <span class="text-white">{{ $listCourse->name }}</span>
+                                             src="{{ asset('storage/'.$list->getLecture()->image) }}" alt="">
+                                        <span class="text-white">{{ $list->getLecture()->name }}</span>
                                     </div>
                                 </div>
-                                <div class="text_config2">{!! $listCourse->description !!}</div>
-                                <a class="c-btn btn-round-02 mb-25 mt-3"
-                                   href="{{ url('Categories/'.$listCourse->slug) }}">get enrolled <i
+                                <div class="text_config2">{!! $list->description !!}</div>
+                                <a class="c-btn mb-20 mt-3" href="{{ url('course/'.$list->slug) }}">Đăng ký ngay<i
                                         class="far fa-arrow-right"></i></a>
                                 <div class="course-meta">
                                     <span><i class="far fa-users"></i> <a href="#">25</a></span>
@@ -97,15 +80,21 @@
                     </div>
                 @endforeach
             </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="course-btn-02 text-center mt-35 mb-30">
+                        <a class="c-btn" href="courses.html">Xem tất cả khóa học<i
+                                class="fal fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- course-area-end -->
 
-
     <!-- team-area-start -->
-    <div class="team-area grey-bg pt-130 pb-100">
-        @include('front_end.blocks.TeamCourse')
-    </div>
+    @include('front_end.blocks.TeamCourse')
     <!-- team-area-end -->
 
+    @include('front_end.blocks.brandCourse')
 @endsection

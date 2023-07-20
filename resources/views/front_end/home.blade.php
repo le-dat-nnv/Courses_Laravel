@@ -19,6 +19,9 @@
         <div class="pt-6">
             <form class="text-center row d-flex justify-content-center login_form" action="{{ route('checklogin') }}" method="POST" >
                 @csrf
+                @if(isset($msg))
+                    <span class="mb-3 text-danger">{{ $msg }}</span>
+                @endif
                 <div class="form-group col-10 row mb-3">
                     <input type="text" name="name" class="form-control block border p-2" placeholder="Display name*" required>
                 </div>
@@ -41,7 +44,7 @@
             </form>
         </div>
         <div class="pt-3 text-center">
-            <span class="text-gray-600 text-xs w-2/3">Already have an account? <a href="{{ route('register') }}" class="text-gray-700 text-xs font-bold">Register</a></span>
+            <span class="text-gray-600 text-xs w-2/3">Already have an account? <a href="{{ route('register_admin') }}" class="text-gray-700 text-xs font-bold">Register</a></span>
         </div>
         <div class="d-flex mt-1 mr-5 mx-5">
             <hr class="w-100 border-gray-300">

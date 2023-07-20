@@ -16,6 +16,12 @@ class courses extends Model
         return $cat;
     }
 
+    public function getLecture() {
+        $id_lec = lectures::find($this->id_lecture);
+        $id_lec;
+        return $id_lec;
+    }
+
     protected $fillable = [
         'title' ,
         'description',
@@ -33,6 +39,8 @@ class courses extends Model
         'is_trash',
         'schedule_datetime_start',
         'schedule_datetime_end',
-        'slug'
+        'slug',
+        'id_lecture',
+        'curriculum'
     ];
 }

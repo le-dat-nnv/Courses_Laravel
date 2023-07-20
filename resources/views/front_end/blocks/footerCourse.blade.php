@@ -19,16 +19,9 @@
             <div class="footer-widget mb-30">
                 <h4 class="footer-widget-title mb-25">Our Courses</h4>
                 <ul class="footer-list">
-                    <li><a href="#">Wed Development</a></li>
-                    <li><a href="#">Business Studies</a></li>
-                    <li><a href="#">Computer Engineering</a></li>
-                    <li><a href="#">English Learning</a></li>
-                    <li><a href="#">Graphics Design</a></li>
-                    <li><a href="#">Color Combinitions</a></li>
-                    <li><a href="#">Software Development</a></li>
-                    <li><a href="#">Photography</a></li>
-                    <li><a href="#">Advance WordPress</a></li>
-                    <li><a href="#">Basic PSD To HTML</a></li>
+                    @foreach($data_cat as $list)
+                        <li><a href="#">{{ $list->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -60,7 +53,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="copyright-text">
-                    <p>Copyright © 2020 <a href="#">BDevs</a> All Rights Reserved.</p>
+                    <p>Copyright Cao đẳng <a href="#">FPT</a> Polytechnic</p>
                 </div>
             </div>
         </div>

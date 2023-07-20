@@ -79,22 +79,24 @@ class ViewComposerServiceProvider extends ServiceProvider
             $data = categories::select('id', 'name', 'image', 'description', 'slug')->get();
             $view->with('title', $title)->with('data', $data);
         });
+        View::share('data_cat', categories::select('id', 'name', 'image', 'description', 'slug')->get());
     }
 
     private function composeViewCoursePopular()
     {
         view::composer('front_end.blocks.coursePopular', function ($view) {
             $title = 'Available Courses';
-            $data = courses::select('id', 'title', 'image', 'description', 'start_date', 'end_date', 'price')->limit(3)->get();
+            $data = courses::select('id', 'title', 'image', 'description', 'start_date', 'end_date', 'price' , 'id_lecture')->limit(3)->get();
             $view->with('title', $title)->with('data', $data);
         });
+        View::share('data_popular', courses::select('id', 'title', 'image', 'description', 'start_date', 'end_date', 'price' , 'id_lecture')->get());
     }
 
     private function composoViewLecture()
     {
         view::composer('front_end.blocks.TeamCourse', function ($view) {
             $title = 'Lecture Team';
-            $data = lectures::select('id', 'name', 'description', 'duration', 'image', 'specialize')->limit(4)->get();
+            $data = lectures::select('id', 'name', 'description', 'duration', 'image', 'specialize' , 'slug')->limit(4)->get();
             $view->with('title', $title)->with('data', $data);
         });
     }

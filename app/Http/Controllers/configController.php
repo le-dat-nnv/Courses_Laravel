@@ -72,6 +72,7 @@ class configController extends Controller
         ];
 
         config::insert($data);
+        return redirect('config');
 
     }
 

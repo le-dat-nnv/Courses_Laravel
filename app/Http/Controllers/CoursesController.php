@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\categories;
+use App\Models\lectures;
 use Illuminate\Http\Request;
 use App\Models\courses;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ class CoursesController extends Controller
     public function getAdd() {
         $product = courses::all();
         $categories = categories::select('id' , 'name')->get();
+        $lecture = lectures::select('id' , 'name')->get();
         return view('back_end.courses.add' , compact('product' , 'categories'));
     }
 
@@ -47,7 +49,9 @@ class CoursesController extends Controller
             'is_trash' => $request->is_trash,
             'schedule_datetime_start' => $request->schedule_datetime_start,
             'schedule_datetime_end' => $request->schedule_datetime_end,
-            'slug' => $slug
+            'slug' => $slug,
+            'id_lecture' => $request->id_lecture,
+            'curriculum' => $request->curriculum
         ];
         $currentYear = date('Y');
         $currentMonth = date('m');
@@ -65,7 +69,8 @@ class CoursesController extends Controller
     public function edit($id , Request $request){
         $data = courses::find($id);
         $categories = categories::select('id' , 'name')->get();
-        return view('back_end.courses.add' , compact('data' , 'categories'));
+        $lecture = lectures::select('id' , 'name')->get();
+        return view('back_end.courses.add' , compact('data' , 'categories' , 'lecture'));
     }
 
     public function update($id , Request $request) {
@@ -91,7 +96,9 @@ class CoursesController extends Controller
             'is_trash' => $request->is_trash,
             'schedule_datetime_start' => $request->schedule_datetime_start,
             'schedule_datetime_end' => $request->schedule_datetime_end,
-            'slug' => $slug
+            'slug' => $slug,
+            'id_lecture' => $request->id_lecture,
+            'curriculum' => $request->curriculum
         ];
         $currentYear = date('Y');
         $currentMonth = date('m');
