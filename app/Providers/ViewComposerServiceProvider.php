@@ -86,10 +86,10 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view::composer('front_end.blocks.coursePopular', function ($view) {
             $title = 'Available Courses';
-            $data = courses::select('id', 'title', 'image', 'description', 'start_date', 'end_date', 'price' , 'id_lecture')->limit(3)->get();
+            $data = courses::select('id', 'title', 'image', 'description', 'start_date', 'end_date', 'price' , 'id_lecture' , 'slug')->limit(3)->get();
             $view->with('title', $title)->with('data', $data);
         });
-        View::share('data_popular', courses::select('id', 'title', 'image', 'description', 'start_date', 'end_date', 'price' , 'id_lecture')->get());
+        View::share('data_popular', courses::select('id', 'title', 'image', 'description', 'start_date', 'end_date', 'price' , 'id_lecture' , 'slug')->get());
     }
 
     private function composoViewLecture()

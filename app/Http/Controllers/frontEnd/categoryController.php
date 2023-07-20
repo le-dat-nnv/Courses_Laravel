@@ -17,7 +17,7 @@ class categoryController extends Controller
     {
         $data = categories::select('id', 'name')->get();
         $course = DB::table('tb_courses')->select('tb_courses.id', 'title', 'tb_lectures.image',
-            'price', 'tb_courses.description', 'id_category', 'slug' , 'name')
+            'price', 'tb_courses.description', 'id_category', 'tb_courses.slug' , 'name')
             ->join('tb_lectures' , 'tb_lectures.id' , '=' , 'tb_courses.id_lecture')->get();
         return view('front_end.modules.categories', compact('data', 'course'));
     }

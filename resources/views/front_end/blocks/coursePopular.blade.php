@@ -18,7 +18,7 @@
             <div class="course-wrapper white-bg mb-30">
                 <div class="course-inner">
                     <div class="course-img pos-rel mb-25">
-                        <a href="courses-details.html"><img src="{{ asset('front_end/assets/img/course/c-01.jpg') }}" alt=""></a>
+                        <a href="{{ url('course/'.$list->slug) }}"><img src="{{ asset('front_end/assets/img/course/c-01.jpg') }}" alt=""></a>
                         <div class="course__instructors pos-abl d-flex align-items-center">
                             <div class="course__instructor--thumb">
                                 <img style="width: 35px" src="{{ asset('storage/'.$list->getLecture()->image) }}" alt="">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="course-text">
                         <div class="course-cat-meta d-flex align-items-center mb-15">
-                            <span><a href="courses-details.html">english</a></span>
+                            <span><a href="{{ url('course/'.$list->slug) }}">english</a></span>
                             <div class="review-icon">
                                 <a href="#"><i class="fas fa-star"></i></a>
                                 <a href="#"><i class="fas fa-star"></i></a>
@@ -40,7 +40,7 @@
                                 <a href="#"><i class="fas fa-star-half-alt"></i></a>
                             </div>
                         </div>
-                        <h4 class="semi-title pb-30 mb-20"><a href="courses-details.html">{{ $list->title.' For
+                        <h4 class="semi-title pb-30 mb-20"><a href="{{ url('course/'.$list->slug) }}">{{ $list->title.' For
                                 Learning
                                 English Courses' }} </a></h4>
                         <div class="course-meta">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="course-text course-text-02 theme-bg">
                     <div class="course-cat-meta course-cat-meta-02 d-flex align-items-center mb-15">
-                        <span><a href="courses-details.html">business</a></span>
+                        <span><a href="{{ url('course/'.$list->slug) }}">business</a></span>
                         <div class="review-icon">
                             <a href="#"><i class="fas fa-star"></i></a>
                             <a href="#"><i class="fas fa-star"></i></a>
@@ -61,7 +61,7 @@
                             <a href="#"><i class="fas fa-star-half-alt"></i></a>
                         </div>
                     </div>
-                    <h4 class="semi-title mb-30"><a href="courses-details.html">{{ $list->title.' For
+                    <h4 class="semi-title mb-30"><a href="{{ url('course/'.$list->slug) }}">{{ $list->title.' For
                             Learning
                             English Courses' }}</a></h4>
                     <div class="course__instructor d-flex align-items-center mb-25">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="text_config2">{!! $list->description !!}</div>
-                    <a class="c-btn mb-4 mt-3" href="courses-details.html">get enrolled <i class="far fa-arrow-right"></i></a>
+                    <a class="c-btn mb-4 mt-3" href="{{ url('course/'.$list->slug) }}">get enrolled <i class="far fa-arrow-right"></i></a>
                     <div class="course-meta">
                         <span><i class="far fa-users"></i> <a href="#">25</a></span>
                         <span><i class="far fa-book"></i> <a href="#">36hr</a></span>

@@ -13,10 +13,10 @@
             <div class="col-xl-3 col-lg-3 col-md-6">
             <div class="course-cat-wrapper mb-30">
                 <div class="course-cat-img">
-                    <a href="courses-details.html"><img src="{{ asset('storage/'.$list->image) }}" alt=""></a>
+                    <a href="{{ route('CategoryCourses') }}"><img src="{{ asset('storage/'.$list->image) }}" alt=""></a>
                 </div>
                 <div class="course-cat-text">
-                    <h4><a href="courses-details.html">{{ $list->name }}</a></h4>
+                    <h4><a href="{{ route('CategoryCourses') }}">{{ $list->name }}</a></h4>
                     <span class="text_config">Web {{ $list->name }} Course</span>
                     <div class="course-cat-meta">
                         <span><i class="far fa-users"></i> <a href="#">250</a></span>

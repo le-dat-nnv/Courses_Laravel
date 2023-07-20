@@ -19,7 +19,7 @@ class courseController extends Controller
         $courses_detail = courses::select('tb_courses.id', 'title', 'tb_courses.description',
             'tb_courses.image', 'curriculum' , 'tb_lectures.name' , 'tb_lectures.image as lecture_image' , 'specialize')
             ->join('tb_lectures' , 'tb_courses.id_lecture' , '=' , 'tb_lectures.id')
-            ->where('slug', '=', $slug)->first();
+            ->where('tb_courses.slug', '=', $slug)->first();
         return view('front_end.modules.courses_detail', compact('courses_detail'));
     }
 }
