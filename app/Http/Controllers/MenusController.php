@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\categoryMenu;
 use App\Models\courses;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class MenusController extends Controller
 {
@@ -16,7 +18,11 @@ class MenusController extends Controller
      */
     public function index()
     {
-        $data = Menu::paginate(15);
+        $data = Menu::where('tb_menu.softDeletes' , '=' , 0)
+            ->select('tb_menu.id' , 'tb_menu.name' , 'tb_menu.slug' , 'tb_menu.status')
+            ->where('tb_category_menus.softDeletes' , '=' , 0)
+            ->join('tb_category_menus' , 'tb_menu.id_menuCat' , '=' , 'tb_category_menus.id')
+            ->paginate(15);
         return view('back_end.Menu.list' , compact('data'));
     }
 
@@ -28,7 +34,8 @@ class MenusController extends Controller
     public function create()
     {
         $product = Menu::select('id', 'name')->get();
-        return view('back_end.Menu.add' , compact('product'));
+        $menuCat = categoryMenu::select('id' , 'name')->where('softDeletes' , '=' , 0)->get();
+        return view('back_end.Menu.add' , compact('product' , 'menuCat'));
     }
 
     /**
@@ -39,17 +46,21 @@ class MenusController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'slug' => 'required',
-            'parent_id' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'id_menuCat' => 'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
-        Menu::create($validator->validated());
+        $slug = Str::slug($request->slug);
+        $validatedData = $validator->validated();
+        $validatedData['slug'] = $slug;
+        Menu::create($validatedData);
+        return redirect('menu');
     }
 
     /**
@@ -76,8 +87,9 @@ class MenusController extends Controller
 //        $product = $products->map(function ($product) {
 //            return $product->only(['id', 'name']);
 //        })->all();
+        $menuCat = categoryMenu::select('id' , 'name')->where('softDeletes' , '=' , 0)->get();
 
-        return view('back_end.Menu.add', compact('data', 'product'));
+        return view('back_end.Menu.add', compact('data', 'product' , 'menuCat'));
     }
 
     /**
@@ -92,19 +104,19 @@ class MenusController extends Controller
         $validator = Validator::make($request->all() , [
             'name' => 'required',
             'slug' => 'required',
-            'parent_id' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'id_menuCat' => 'required'
         ]);
 
         if($validator->fails()) {
-            return  redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $data = [
             'name' => $request->input('name'),
             'slug' => $request->input('slug'),
-            'parent_id' => $request->input('parent_id'),
-            'status' => $request->input('status')
+            'status' => $request->input('status'),
+            'id_menuCat' => $request->input('id_menuCat')
         ];
         $menu = Menu::find($request->id_s);
         if (!$menu) {
@@ -114,6 +126,7 @@ class MenusController extends Controller
         }
 
         $menu->update($data);
+        return redirect('menu');
     }
 
     /**
@@ -124,7 +137,13 @@ class MenusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Menu::find($id)->update(['softDeletes'=> 1]);
+        if($menu) {
+            return redirect('menu');
+        }
+        else {
+            return redirect()->back()->with('msg' , 'chưa thế xóa');
+        }
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\categoryMenu;
 use App\Models\config;
 use App\Models\Menu;
 use App\Models\MenuAdmin;
@@ -20,7 +21,8 @@ class ModulesController extends Controller
      */
     public function index()
     {
-        //
+        $data = Modules::select('id' , 'name' , 'summary' , 'id_categories' , 'module')->paginate(15);
+        return \view('back_end.Modules.list' , compact('data'));
     }
 
     /**
@@ -31,7 +33,9 @@ class ModulesController extends Controller
     public function create()
     {
         $list_table = MenuAdmin::select('id' , 'name')->where('parent_id' , '=' , 0)
-            ->whereNotIn('name' , ['config' , 'Modules'])
+            ->where('level_role' , '=' , 0)
+            ->whereNotIn('name' , ['config' , 'Modules', 'bill' , 'categories' , 'banner' , 'Class Course' , 'courseS'
+                , 'LectureS' , 'Promotion' , 'Rate'])
             ->get();
         return view('back_end.Modules.add' , compact('list_table'));
     }
@@ -44,17 +48,21 @@ class ModulesController extends Controller
      */
     public function store(StoreModulesRequest $request)
     {
-        $list_table = MenuAdmin::select('id' , 'name')->where('parent_id' , '=' , 0)
-            ->whereNotIn('name' , ['config' , 'Modules'])
-            ->get();
-        return view('back_end.Modules.add' , compact('list_table'));
+        $module = Modules::insert($request->except('_token'));
+        if($module) {
+            return redirect('modules');
+        }
+        else {
+            return \view('back_end.Modules.add')->with('msg' , 'Lỗi chưa thế thêm data');
+        }
+
     }
 
     public function getModules(Request $request , $slug) {
         $data_request = [];
         switch ($slug) {
             case 'menu':
-                $data_request = Menu::all();
+                $data_request = categoryMenu::select('id' , 'name')->get();
                 break;
             case 'Strengths':
                 $data_request = config::select('id', 'name')->get();

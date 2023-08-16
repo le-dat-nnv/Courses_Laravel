@@ -17,9 +17,19 @@
                 @foreach($nameTitle as $key=>$name)
                     <label class='mb-2 mt-4' for="{{ $name }}">{{ $name }}</label>
                     @if($inputType[$key] === 'textarea')
-                        <textarea class="form-control ckeditors_ledat @error($nameInputs[$key]) is-invalid @enderror" name="{{ $nameInputs[$key] }}"></textarea>
+                        <textarea class="form-control ckeditors_ledat @error($nameInputs[$key]) is-invalid @enderror" name="{{ $nameInputs[$key] }}">{{ old($nameInputs[$key]) }}</textarea>
+                        @error($nameInputs[$key])
+                        <p class="invalid-feedback">
+                            <strong>{{ $errors->first($nameInputs[$key]) }}</strong>
+                        </p>
+                        @enderror
                     @else
-                        <input class="form-control @error($nameInputs[$key]) is-invalid @enderror" type="{{ $inputType[$key] }}" name="{{ $nameInputs[$key] }}">
+                        <input class="form-control @error($nameInputs[$key]) is-invalid @enderror" type="{{ $inputType[$key] }}" name="{{ $nameInputs[$key] }}" value="{{ old($nameInputs[$key]) }}">
+                        @error($nameInputs[$key])
+                            <p class="invalid-feedback">
+                                <strong>{{ $errors->first($nameInputs[$key]) }}</strong>
+                            </p>
+                        @enderror
                     @endif
                 @endforeach
                     <label class='mb-2 mt-4' for="modules_choose">Modules choose</label>
@@ -46,9 +56,19 @@
 @endsection
 @section('script')
     <script>
-        $('#checkModule').click(function () {
+        // Xử lý sự kiện change trên select
+        $('#checkModule').change(function (event) {
             var selectedModule = $(this).val();
+            loadData(selectedModule);
+        });
 
+        // Kích hoạt sự kiện change một lần khi trang web được tải xong
+        $(document).ready(function() {
+            var defaultModule = $('#checkModule').val();
+            loadData(defaultModule);
+        });
+
+        function loadData(selectedModule) {
             // Gửi yêu cầu Ajax để lấy nội dung từ server và đặt vào #moduleFields
             $.ajax({
                 type: 'GET',
@@ -57,25 +77,24 @@
                     $('#moduleFields').empty();
 
                     if (response.length > 0) {
-                            var itemHTML = '<div class="module-item">';
-                            itemHTML += '<label class="mb-2 mt-4" for="categories">Categories choose</label>';
-                            itemHTML += '<select class="form-select" aria-label="Default select example" name="categories" id="checkCategories">';
-                            $.each(response, function (index, item) {
-                                itemHTML += '<option value="' + item.id + '">' + item.name + '</option>';
-                            });
-                            itemHTML += '</select>';
-                            itemHTML += '<label class="mb-2 mt-4" for="limit">Limit</label>';
-                            itemHTML += '<input type="text" name="limit" class="form-control">';
-                            itemHTML += '</div>';
+                        var itemHTML = '<div class="module-item">';
+                        itemHTML += '<label class="mb-2 mt-4" for="categories">Categories choose</label>';
+                        itemHTML += '<select class="form-select" aria-label="Default select example" name="id_categories" id="checkCategories">';
+                        $.each(response, function (index, item) {
+                            itemHTML += '<option value="' + item.id + '">' + item.name + '</option>';
+                        });
+                        itemHTML += '</select>';
+                        itemHTML += '<label class="mb-2 mt-4" for="limit">Limit</label>';
+                        itemHTML += '<input type="text" name="limit" class="form-control">';
+                        itemHTML += '</div>';
 
-                            $('#moduleFields').append(itemHTML);
+                        $('#moduleFields').append(itemHTML);
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error(error);
                 }
             });
-        });
+        }
     </script>
 @endsection
-

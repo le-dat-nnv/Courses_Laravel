@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class categoriesController extends Controller
 {
     public function index() {
-        $data = categories::paginate(15);
+        $data = categories::where('softDeletes' , '=' , 0)->paginate(15);
         return view('back_end.categories.list' , compact('data'));
     }
 
@@ -62,6 +62,16 @@ class categoriesController extends Controller
             $data['image'] = $fileNew;
             categories::find($id)->update($data);
             return redirect()->to('categories/list');
+        }
+    }
+
+    public function destroy($id) {
+        $categories = categories::find($id)->update(['softDeletes'=>1]);
+        if($categories) {
+            return redirect('categories/list');
+        }
+        else {
+            return redirect()->back()->with('msg' , 'chưa thế xóa recored');
         }
     }
 }

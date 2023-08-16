@@ -22,6 +22,9 @@
                     @if(isset($url_delete))
                         <td>Xóa</td>
                     @endif
+                    @if(isset($delete))
+                        <td>Xóa</td>
+                    @endif
                 </tr>
                 </thead>
                 <tbody id="product-list-body">
@@ -47,6 +50,15 @@
                         @if(isset($url_delete))
                             <td>
                                 <form action="{{ URL::to('admin/' ."$url_delete/$product->id") }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-primary">Xóa</button>
+                                </form>
+                            </td>
+                        @endif
+                        @if(isset($delete))
+                            <td>
+                                <form action="{{ route($delete.'.destroy' , $product->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-primary">Xóa</button>

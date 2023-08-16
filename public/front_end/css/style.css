@@ -32,4 +32,10 @@
   margin-left: 0px !important;
   padding-left: 0px !important; }
 
+.form_hidden {
+  display: none; }
+
+.nice-select {
+  width: 100% !important; }
+
 /*# sourceMappingURL=style.css.map */

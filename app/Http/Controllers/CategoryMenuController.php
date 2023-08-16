@@ -15,8 +15,10 @@ class CategoryMenuController extends Controller
      */
     public function index()
     {
-        dd('123');
-        return view('back_end.Menu.listCateMenu');
+        $data = categoryMenu::select('id' , 'name' , 'status')
+            ->where('softDeletes' , '=' , 0)
+            ->paginate(15);
+        return view('back_end.Menu.listCateMenu' , compact('data'));
     }
 
     /**
@@ -37,7 +39,13 @@ class CategoryMenuController extends Controller
      */
     public function store(StorecategoryMenuRequest $request)
     {
-        dd($request->except('_token'));
+            $menuCat = categoryMenu::insert($request->except(['_token' , 'id_s']));
+            if($menuCat) {
+                return redirect('categoriesMenu');
+            }
+            else{
+                return redirect('categoriesMenu/create')->json(['msg'=> 'chưa thế thêm thành công']);
+            }
     }
 
     /**
@@ -80,8 +88,14 @@ class CategoryMenuController extends Controller
      * @param  \App\Models\categoryMenu  $categoryMenu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categoryMenu $categoryMenu)
+    public function destroy($id)
     {
-        //
+        $menuCategory = categoryMenu::find($id)->update(['softDeletes'=> 1]);
+        if($menuCategory) {
+            return redirect('categoriesMenu');
+        }
+        else {
+            return redirect()->back()->with('msg' , 'chưa thế xóa recored');
+        }
     }
 }

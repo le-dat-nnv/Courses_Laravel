@@ -13,7 +13,9 @@ class Menu extends Model
         'slug',
         'name',
         'parent_id',
-        'status'
+        'status',
+        'id_menuCat',
+        'softDeletes'
     ];
 
     public function getCat() {

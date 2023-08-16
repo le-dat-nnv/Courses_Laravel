@@ -19,7 +19,7 @@ class CoursesController extends Controller
         $product = courses::all();
         $categories = categories::select('id' , 'name')->get();
         $lecture = lectures::select('id' , 'name')->get();
-        return view('back_end.courses.add' , compact('product' , 'categories'));
+        return view('back_end.courses.add' , compact('product' , 'categories' , 'lecture'));
     }
 
     public function payList() {
@@ -27,6 +27,7 @@ class CoursesController extends Controller
     }
 
     public function store(Request $request) {
+
         if(empty($request->slug)) {
             $slug = Str::slug($request->title);
         }
@@ -63,6 +64,9 @@ class CoursesController extends Controller
             $data['image'] = $newFile;
             courses::insert($data);
             return redirect('courses/list');
+        }
+        else{
+            return redirect()->back();
         }
     }
 

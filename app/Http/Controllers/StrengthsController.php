@@ -98,8 +98,11 @@ class StrengthsController extends Controller
      * @param  \App\Models\Strengths  $strengths
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Strengths $strengths)
+    public function destroy($id)
     {
-        //
+        $delete_strengths = Strengths::find($id)->delete();
+        if($delete_strengths) {
+            return redirect('strengths');
+        }
     }
 }

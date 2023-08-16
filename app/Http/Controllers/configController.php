@@ -108,7 +108,6 @@ class configController extends Controller
     public function update(Request $request, $id)
     {
 
-        dd(config::all());
         $update_id= explode(",", $id);
         $content = [];
         $check_file_empty = [];
@@ -119,7 +118,6 @@ class configController extends Controller
                 'file' => $request->file('content_' . $i)
             ];
         }
-
         $combinedFields = [];
         foreach ($content as $field) {
             if (!is_null($field['input'])) {
@@ -129,7 +127,6 @@ class configController extends Controller
                 $combinedFields[] = $field['file'];
             }
         }
-
 
         $contents = array_filter($content, function($values) {
             return !is_null($values);
@@ -142,8 +139,8 @@ class configController extends Controller
                 $check_file_empty[] = $update_ids;
             }
         }
-
         $update_id = array_diff($update_id, $check_file_empty);
+        $update_id = array_values($update_id);
         $data = [
             0 => [
                 'input_type'=>'text',
@@ -159,7 +156,6 @@ class configController extends Controller
         $currentYear = date('Y');
         $currentMonth = date('m');
         $dayMonth = date('d');
-
         foreach ($combinedFields as $key => $testData) {
             if($testData instanceof \Illuminate\Http\UploadedFile) {
                 $newfile = $testData;
@@ -170,11 +166,9 @@ class configController extends Controller
             else {
                 $data_update = $testData;
             }
-
             config::whereIn('id',[$update_id[$key]])->update(['content' => $data_update]);
         }
-
-        return response()->json(['messages' => 'đã sửa thành công']);
+        return redirect('config');
     }
 
     /**

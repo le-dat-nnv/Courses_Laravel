@@ -139,9 +139,10 @@
         <script src="{{ asset('front_end/assets/js/jquery.scrollUp.min.js') }}"></script>
         <script src="{{ asset('front_end/assets/js/imagesloaded.pkgd.min.js') }}"></script>
         <script src="{{ asset('front_end/assets/js/jquery.magnific-popup.min.js') }}"></script>
-        <script src="{{ asset('front_end/assets/js/jquery.nice-select.js') }}"></script>
+{{--        <script src="{{ asset('front_end/assets/js/jquery.nice-select.js') }}"></script>--}}
         <script src="{{ asset('front_end/assets/js/jquery.easypiechart.js') }}"></script>
         <script src="{{ asset('front_end/assets/js/main.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        @yield('script')
     </body>
 </html>

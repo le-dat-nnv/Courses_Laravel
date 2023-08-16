@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PromotionsController;
+use App\Http\Controllers\frontEnd\courseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('fetch-provinces' , [PromotionsController::class , 'fetch_provinces'] );
 Route::post('fetch-districts' , [PromotionsController::class , 'fetch_districts'] );
 Route::post('fetch-wards' , [PromotionsController::class , 'fetch_wards'] );
+
+
+Route::get('get-ward/{districts}' , [courseController::class , 'getWards'])->name('get-ward');
+Route::get('get-districts/{city}' , [courseController::class , 'getDistricts'])->name('get-districts');
+Route::get('get-city' , [courseController::class , 'getCity'])->name('get-city');

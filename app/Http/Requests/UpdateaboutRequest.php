@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreModulesRequest extends FormRequest
+class UpdateaboutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,14 @@ class StoreModulesRequest extends FormRequest
     public function rules()
     {
         $rules = [];
-        $currentMethodAction = $this->route()->getActionMethod();
         switch ($this->method()){
-            case 'POST':
-                switch ($currentMethodAction){
-                    case 'store':
+            case 'POST' :
+                switch ($this->route()->getActionMethod()) {
+                    case 'update' :
                         $rules = [
-                            'name' => 'required|unique:tb_modules',
+                            'name' => 'required',
                             'summary' => 'required',
-                            'module' => 'required',
-                            'id_categories' => 'required'
+                            'iframe' => 'required'
                         ];
                         break;
                 }

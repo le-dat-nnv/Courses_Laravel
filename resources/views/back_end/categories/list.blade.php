@@ -4,6 +4,6 @@
     'nameTitle' => ['id' , 'name' , 'Đường dẫn' , "Images"],
     'list' => ['id' , 'name' , 'slug'  , 'image'],
     'url' => 'Categories',
-    'url_delete' => 'ledat'
+    'delete' => 'Categories'
 ])
 @endsection

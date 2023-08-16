@@ -209,11 +209,7 @@
                                                 class="f-right">06 March 2021</span></a></li>
                                 </ul>
                                 <div class="enroll-btn mb-40 text-center">
-                                    <form action="{{ route('addToCart.add-to-cart') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $courses_detail->id }}">
-                                        <button type="submit" class="c-btn btn btn-success text-white">Đăng ký ngay</button>
-                                    </form>
+                                    <a href="{{ route('addToCart.add-to-cart' , ['id'=>$courses_detail->id]) }}" class="c-btn btn btn-success text-white">Đăng ký ngay</a>
                                 </div>
                             </div>
                             <div class="widget">

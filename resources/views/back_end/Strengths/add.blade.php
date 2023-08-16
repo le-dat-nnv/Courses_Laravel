@@ -16,7 +16,7 @@
         'method' => 'POST',
         'TitleNames' => ['Tên', 'Tiêu đề ngắn', 'Icon Svg' , 'Mô tả'],
         'inputNames' => ['name', 'name_short', 'icon_svg' , 'description'],
-        'inputTypes' => ['text', 'text', 'textarea1' , 'textarea'],
+        'inputTypes' => ['text', 'text', 'text' , 'textarea'],
         'select_add' => '<label class="mb-2 mt-4" for="status">Status</label>
         <select class="form-control" name="status" id="status">'.$options.'
         </select>',

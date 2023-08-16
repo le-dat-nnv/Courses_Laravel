@@ -25,10 +25,11 @@ class categoryController extends Controller
     public function getCategoriesCourseDetail($slug)
     {
         $courses_detail = DB::table('tb_courses')->select('tb_courses.id', 'title', 'tb_lectures.image',
-            'price', 'tb_courses.description', 'id_category', 'slug' , 'name' ,
+            'price', 'tb_courses.description', 'id_category', 'tb_courses.slug' , 'name' ,
             'tb_courses.duration' ,'tb_lectures.image as lecture_image' , 'specialize' , 'curriculum' )
             ->join('tb_lectures' , 'tb_lectures.id' , '=' , 'tb_courses.id_lecture')
-            ->where('slug', '=', $slug)->first();
+            ->where('tb_courses.slug', '=', $slug)->first();
+
         return view('front_end.modules.courses_detail', compact('courses_detail'));
     }
 
@@ -49,7 +50,8 @@ class categoryController extends Controller
         $cart = session()->get('cart', []);
         $cart[$id] = $course_show->toArray();
         session()->put('cart', $cart);
-        return view('front_end.modules.add_to_cart');
+//        return view('front_end.modules.add_to_cart');
+        return redirect(route('gio-hang'));
     }
 
     public function getLecture($slug) {

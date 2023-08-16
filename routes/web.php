@@ -18,6 +18,7 @@ use App\Http\Controllers\frontEnd\categoryController as frontendCate;
 use App\Http\Controllers\ModulesController;
 use App\Http\Controllers\frontEnd\courseController as frontCourse;
 use App\Http\Controllers\CategoryMenuController;
+use App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ use App\Http\Controllers\CategoryMenuController;
 
 Route::get('/', function () {
     return view('front_end.layout.home');
-});
+})->name('home');
 
 Route::get('dashboard', [MenuAdminController::class, 'index'])->middleware('checkAuth');
 
@@ -65,6 +66,7 @@ Route::prefix('categories')->group(function () {
     Route::post('store', [categoriesController::class, 'store'])->name('Categories.store');
     Route::get('edit/{id}', [categoriesController::class, 'edit'])->name('Categories.edit');
     Route::put('Categories/{id}', [categoriesController::class, 'update'])->name('Categories.update');
+    Route::delete('Categories/{id}', [categoriesController::class, 'destroy'])->name('Categories.destroy');
 });
 
 
@@ -79,12 +81,13 @@ Route::resource('bill', BillController::class)->except(['show']);
 Route::resource('strengths', StrengthsController::class)->except(['show']);
 Route::resource('modules', ModulesController::class)->except(['show']);
 Route::resource('categoriesMenu',CategoryMenuController::class)->except(['show']);
+Route::resource('about',AboutController::class)->except(['show']);
 Route::get('promotion/statistical', [PromotionsController::class, 'statistical'])->name('promotion.statistical');
 
 
 Route::get('Categories', [frontendCate::class, 'getCategoriesCourse'])->name('CategoryCourses');
 Route::get('Categories/{slug}', [frontendCate::class, 'getCategoriesCourseDetail'])->name('CategoryCoursesDetail');
-Route::post('add-to-cart', [frontendCate::class, 'addToCart'])->name('addToCart.add-to-cart');
+Route::get('add-to-cart', [frontendCate::class, 'addToCart'])->name('addToCart.add-to-cart');
 
 // đăng nhập
 Route::get('sign-in', [AuthController::class, 'sign_in_front_end'])->name('sing_in_front_end');
@@ -93,15 +96,23 @@ Route::get('sign-in', [AuthController::class, 'sign_in_front_end'])->name('sing_
 Route::get('register-account', [AuthController::class, 'register_frontend'])->name('register_frontend');
 Route::post('register-account', [AuthController::class, 'register_frontend'])->name('register_frontend');
 
-// đng xuất
+// đăng xuất
 Route::get('sign-out', [AuthController::class, 'sign_out_front_end'])->name('log_out_front_end');
 Route::post('sign-in', [AuthController::class, 'sign_in_front_end'])->name('sign_in_front_end');
 
 
-Route::get('contact', [AuthController::class, 'register_frontends'])->name('contact');
+Route::get('Contact', [frontCourse::class, 'contact'])->name('contact');
 
 Route::get('courseList', [frontCourse::class, 'getFrontCourse'])->name('course.listFrontEnd');
 
 Route::get('course/{slug}', [frontCourse::class, 'getCoursesCourseDetail'])->name('getCoursesCourseDetail');
 
 Route::get('getLecture/{slug}', [frontendCate::class, 'getLecture'])->name('getLecture');
+
+Route::post('add-cart-check-out', [frontCourse::class, 'addCarts'])->name('add-cart-check-out');
+
+Route::get('gio-hang', [frontCourse::class, 'gioHang'])->name('gio-hang');
+
+Route::post('invoice' , [frontCourse::class , 'invoice'])->name('invoice');
+
+Route::get('check-out', [frontCourse::class, 'checkOut'])->name('check-out');

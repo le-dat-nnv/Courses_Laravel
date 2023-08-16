@@ -14,9 +14,9 @@
     @include('back_end.forms.form', [
         'action' => 'categoriesMenu',
         'method' => 'POST',
-        'TitleNames' => ['Tên Menu', 'Đường dẫn', 'Parent_id'],
-        'inputNames' => ['name', 'slug', 'parent_id'],
-        'inputTypes' => ['text', 'text', 'select'],
+        'TitleNames' => ['Tên Menu', 'Trạng thái'],
+        'inputNames' => ['name', 'status'],
+        'inputTypes' => ['text', 'select'],
         'select_add' => '<label class="mb-2 mt-4" for="status">Status</label>
         <select class="form-control" name="status" id="status">'.$options.'
         </select>',

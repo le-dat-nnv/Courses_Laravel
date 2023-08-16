@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Modules extends Model
 {
     use HasFactory;
+    protected $table = 'tb_modules';
+    protected $fillable = [
+        'name',
+        'summary' ,
+        'content' ,
+        'module' ,
+        'id_categories' ,
+        'limit'
+    ];
 }

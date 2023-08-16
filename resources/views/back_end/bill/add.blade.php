@@ -1,6 +1,5 @@
 @extends('back_end.layout.index')
 @section('content')
-    <h5>Add Bill</h5>
     @include('back_end.forms.form', [
         'action' => 'rate',
         'method' => 'POST',

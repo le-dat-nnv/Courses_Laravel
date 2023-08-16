@@ -6,15 +6,10 @@
     ])
     <div class="container mt-50 mb-50">
         <div class="alert alert-primary" role="alert">
-            @if(!empty(Session('cart')))
-                Tiến hành thanh toán hóa đơn
-            @else
-                 Hiện tại chưa có đơn hàng nào trong giỏ hàng
-            @endif
+            Tiến hành thanh toán hóa đơn
         </div>
         <div class="row">
             <div class="card col-6 mt-3">
-                @if(!empty(Session('cart')))
                 <div class="card-body mb-3">
                     <span class="mt-3 mb-5">Giỏ hàng của bạn</span>
                 </div>
@@ -23,8 +18,7 @@
                         @php
                             $totalPrice = 0;
                         @endphp
-                        @if(!empty(Session('cart')))
-                        @foreach (Session('cart') as $key=>$ca)
+                        @foreach (session('cart') as $key=>$ca)
                             @php
                                 $totalPrice += $ca['price'];
                             @endphp
@@ -44,7 +38,6 @@
                             </tr>
                             </tbody>
                         @endforeach
-                        @endif
                         <tfoot>
                         <tr class="cart-subtotal">
                             <th colspan="2">Subtotal</th>
@@ -59,16 +52,61 @@
                     @if (Auth::check())
                         <span class="mt-3 mb-3">Chọn phương thức thanh toán</span>
                         <div class="mt-3">
-                            <a href="{{ route('check-out') }}" id="tk-nh" class="btn btn-primary">Thanh toán khi nhận hàng</a>
+                            <button id="tk-nh" type="submit" class="btn btn-primary">Thanh toán khi nhận hàng</button>
                             <button type="submit" class="btn btn-success mx-3">Thanh toán qua VNPay</button>
                         </div>
                     @endif
                 </div>
-                @endif
             </div>
             <div class="col-6 card mt-3">
                 <div class="card-body">
 {{--                    form lưu thông tin người dùng --}}
+
+                    <form action="{{ route('invoice') }}" method="post" class=" mt-50" id="form_block">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label">Email nhận hàng</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email">
+                                @if($errors->has('email'))
+                                    <p class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone">
+                                @if($errors->has('phone'))
+                                    <p class="invalid-feedback">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="load-ward">Chọn xã</label>
+                                <select aria-label="Default Ward" class="form-select @error('ward') is-invalid @enderror" name="ward" id="load-ward">
+                                    <option selected>Chọn xã</option>
+                                </select>
+                                @if($errors->has('ward'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('ward') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                            <select aria-label="Default District" class="mb-3 form-select" name="district" id="load-district">
+                                <option selected>Chọn Huyện</option>
+                            </select>
+                            <select aria-label="Default City" class="mb-3 form-select" name="city" id="load-city">
+                                <option selected>Chọn Tỉnh/Thành Phố</option>
+                            </select>
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                    <label for="floatingTextarea">Notes</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                     @if (!Auth::check())
                         <span class="mt-3 mb-3">Vui lòng đăng nhập để enroll</span>
                         <form class="mt-3" action="{{ route('add-cart-check-out') }}" method="POST">
@@ -103,7 +141,6 @@
 @section('script')
 <script>
     $(document).ready(function() {
-
 
         function loadCities() {
             $.ajax({

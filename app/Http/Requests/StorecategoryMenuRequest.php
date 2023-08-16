@@ -24,11 +24,19 @@ class StorecategoryMenuRequest extends FormRequest
     public function rules()
     {
         $rules = [];
+        $currentMethodController = $this->route()->getActionMethod();
         switch ($this->method()) {
-            case ""
+            case "POST":
+                switch ($currentMethodController){
+                    case 'store':
+                        $rules = [
+                            'name' => 'required|unique:tb_category_menus',
+                            'status' => 'required'
+                        ];
+                        break;
+                }
+            break;
         }
-        return [
-            //
-        ];
+        return $rules;
     }
 }

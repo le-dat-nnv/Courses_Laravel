@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="text_config2">{!! $list->description !!}</div>
-                                <a class="c-btn mb-20 mt-3" href="{{ url('course/'.$list->slug) }}">Đăng ký ngay<i
+                                <a class="c-btn mb-20 mt-3" href="{{ url('add-to-cart/'.$list->slug) }}">Đăng ký ngays<i
                                         class="far fa-arrow-right"></i></a>
                                 <div class="course-meta">
                                     <span><i class="far fa-users"></i> <a href="#">25</a></span>

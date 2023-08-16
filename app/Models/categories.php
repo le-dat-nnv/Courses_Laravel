@@ -15,6 +15,7 @@ class categories extends Model
         'name',
         'slug',
         'description',
-        'image'
+        'image',
+        'softDeletes'
     ];
 }
