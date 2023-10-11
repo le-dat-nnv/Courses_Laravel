@@ -8,6 +8,12 @@ use Illuminate\Support\Str;
 
 class categoriesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkAuth');
+    }
+
     public function index() {
         $data = categories::where('softDeletes' , '=' , 0)->paginate(15);
         return view('back_end.categories.list' , compact('data'));

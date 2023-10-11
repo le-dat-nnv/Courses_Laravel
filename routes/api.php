@@ -28,3 +28,8 @@ Route::post('fetch-wards' , [PromotionsController::class , 'fetch_wards'] );
 Route::get('get-ward/{districts}' , [courseController::class , 'getWards'])->name('get-ward');
 Route::get('get-districts/{city}' , [courseController::class , 'getDistricts'])->name('get-districts');
 Route::get('get-city' , [courseController::class , 'getCity'])->name('get-city');
+
+
+Route::resource('Lectures' , \App\Http\Controllers\api\LecturesController::class);
+
+Route::post('login-api' , [\App\Http\Controllers\HomeController::class , 'LoginApi']);

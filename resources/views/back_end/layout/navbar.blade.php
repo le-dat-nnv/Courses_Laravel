@@ -5,11 +5,11 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            @if(auth()->user()->role == 1)
+{{--            @if(auth()->user()->role == 1)--}}
             <div class="sidebar-brand-text mx-3">Admin <sup>2</sup></div>
-            @else
-                <div class="sidebar-brand-text mx-3">{{ auth()->user()->name }}</div>
-            @endif
+{{--            @else--}}
+{{--                <div class="sidebar-brand-text mx-3">{{ auth()->user()->name }}</div>--}}
+{{--            @endif--}}
         </a>
 
         <!-- Divider -->
@@ -38,7 +38,7 @@
             @php
                 $i++;
             @endphp
-        @if(auth()->user()->role == 1)
+{{--        @if(auth()->user()->role == 1)--}}
             @if($listMenuAdmin->parent_id == 0 && $listMenuAdmin->level_role==0)
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="{{'#collapseUtilities_'.$i}}"
@@ -68,7 +68,7 @@
                 </div>
             </li>
         @endif
-            @elseif(auth()->user()->role == 2)
+{{--            @elseif(auth()->user()->role == 2)--}}
                 @if($listMenuAdmin->parent_id == 0 && $listMenuAdmin->level_role==1)
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="{{'#collapseUtilities_'.$i}}"
@@ -98,7 +98,7 @@
                     </div>
                 </li>
                 @endif
-            @endif
+{{--            @endif--}}
         @endforeach
     </ul>
 

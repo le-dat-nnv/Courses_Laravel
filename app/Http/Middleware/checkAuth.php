@@ -18,11 +18,12 @@ class checkAuth
 
     public function handle($request, $next)
     {
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
-        if (!auth()->check()) {
-            return redirect()->to('login');
-        } else if (auth()->user()->role == 0) {
+        if (Auth()->guard('admin')->check()) {
+            return $next($request);
+        } else if (auth()->user()) {
+            return redirect()->to('/');
+        }
+        else if(!Auth()->guard('admin')->check() && !auth()->user() ) {
             return redirect()->to('/');
         }
         return $next($request);

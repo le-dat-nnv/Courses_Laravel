@@ -67,22 +67,23 @@ Route::prefix('categories')->group(function () {
     Route::get('edit/{id}', [categoriesController::class, 'edit'])->name('Categories.edit');
     Route::put('Categories/{id}', [categoriesController::class, 'update'])->name('Categories.update');
     Route::delete('Categories/{id}', [categoriesController::class, 'destroy'])->name('Categories.destroy');
+})->middleware('checkAuth');
+
+Route::middleware('checkAuth')->group(function () {
+    Route::resource('classCourses', classCoursesController::class);
+    Route::resource('Lectures', LecturesController::class);
+    Route::resource('promotion', PromotionsController::class)->except(['show']);
+    Route::resource('config', configController::class)->except(['show']);
+    Route::resource('menu', MenusController::class)->except(['show']);
+    Route::resource('banner', BannerController::class)->except(['show']);
+    Route::resource('rate', RateController::class)->except(['show']);
+    Route::resource('bill', BillController::class)->except(['show']);
+    Route::resource('strengths', StrengthsController::class)->except(['show']);
+    Route::resource('modules', ModulesController::class)->except(['show']);
+    Route::resource('categoriesMenu',CategoryMenuController::class)->except(['show']);
+    Route::resource('about',AboutController::class)->except(['show']);
+    Route::get('promotion/statistical', [PromotionsController::class, 'statistical'])->name('promotion.statistical');
 });
-
-
-Route::resource('classCourses', classCoursesController::class);
-Route::resource('Lectures', LecturesController::class);
-Route::resource('promotion', PromotionsController::class)->except(['show']);
-Route::resource('config', configController::class)->except(['show']);
-Route::resource('menu', MenusController::class)->except(['show']);
-Route::resource('banner', BannerController::class)->except(['show']);
-Route::resource('rate', RateController::class)->except(['show']);
-Route::resource('bill', BillController::class)->except(['show']);
-Route::resource('strengths', StrengthsController::class)->except(['show']);
-Route::resource('modules', ModulesController::class)->except(['show']);
-Route::resource('categoriesMenu',CategoryMenuController::class)->except(['show']);
-Route::resource('about',AboutController::class)->except(['show']);
-Route::get('promotion/statistical', [PromotionsController::class, 'statistical'])->name('promotion.statistical');
 
 
 Route::get('Categories', [frontendCate::class, 'getCategoriesCourse'])->name('CategoryCourses');
@@ -116,3 +117,16 @@ Route::get('gio-hang', [frontCourse::class, 'gioHang'])->name('gio-hang');
 Route::post('invoice' , [frontCourse::class , 'invoice'])->name('invoice');
 
 Route::get('check-out', [frontCourse::class, 'checkOut'])->name('check-out');
+
+Route::get('send/email', function(){
+
+    $send_mail = 'test@gmail.com';
+
+    dispatch(new App\Jobs\SendEmailQueueJob($send_mail));
+
+    dd('send mail successfully !!');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
